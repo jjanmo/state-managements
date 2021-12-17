@@ -22,9 +22,6 @@ const postsReducer = (state = initialState, action) => {
     case POSTS.DELETE_POST: {
       return state.filter((post) => post.id !== action.payload);
     }
-    case POSTS.UPDATE_POST: {
-      return state.map((post) => (post.id === action.payload.id ? { ...post, ...action.payload.data } : post));
-    }
     default: {
       return state;
     }

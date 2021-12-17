@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import * as postsActions from '../modules/actions/posts';
 
 const styles = {
   wrapper: {
@@ -30,8 +31,17 @@ const styles = {
 };
 
 const Detail = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { id: postID } = useParams();
-  const posts = useSelector((state) => state.posts);
+  const { posts, user } = useSelector(
+    (state) => ({
+      posts: state.posts,
+      user: state.user,
+    }),
+    shallowEqual
+  );
+
   const [post, setPost] = useState({});
 
   const filterPost = useCallback(() => {
@@ -43,8 +53,20 @@ const Detail = () => {
     setPost(post);
   }, [filterPost]);
 
+  const onClickDelete = useCallback(() => {
+    if (!user.info) {
+      alert('로그인을 해야합니다.');
+      return;
+    }
+    dispatch(postsActions.deletePost(Number(postID)));
+    navigate('/', { replace: true });
+  }, []);
+
   return (
     <div style={styles.wrapper}>
+      <div>
+        <button onClick={onClickDelete}>삭제</button>
+      </div>
       <h1>
         <label style={styles.label}>제목</label>
         <br />
