@@ -1,11 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Post = ({ title, description }) => {
+const Post = ({ id, title }) => {
   return (
-    <section>
-      <h1>{title}</h1>
-      <p>{description}</p>
-    </section>
+    <li>
+      <Link
+        to={{
+          pathname: `/posts/${id}`,
+        }}
+      >
+        {title}
+      </Link>
+    </li>
   );
 };
 
