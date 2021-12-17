@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as userActions from '../modules/actions/user';
-import List from './list';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,7 +15,6 @@ const Header = () => {
 
   const onSubmit = useCallback(
     (e) => {
-      console.log(nickname, password);
       e.preventDefault();
       if (!nickname || !password) {
         alert('닉네임 혹은 비밀번호를 입력하세요');
@@ -62,7 +59,6 @@ const Header = () => {
             <Link to="/form">글쓰기</Link>
           </p>
           <button onClick={onClickLogout}>로그아웃</button>
-          <List />
         </>
       ) : (
         <form onSubmit={onSubmit}>
