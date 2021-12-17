@@ -1,7 +1,8 @@
 import React from 'react';
+import Post from './post';
 
-const List = () => {
-  return <ul>items</ul>;
+const List = ({ posts }) => {
+  return <ul>{posts && posts.length > 0 && posts.map((post) => <Post key={post.id} {...post} />)}</ul>;
 };
 
 export default List;
