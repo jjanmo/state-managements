@@ -1,24 +1,33 @@
 import * as USER from '../actions/user';
 
 const initialState = {
-  id: '',
-  nickname: '',
-  isAdmin: false,
-  isLoggedIn: false,
+  status: '', //''(default/로그아웃), loggingIn(로그인중) loggedIn(로그인완료)
+  info: null, // { id, nickname, isAdmin }
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER.LOGIN: {
+    case USER.LOGIN_REQUEST: {
       return {
-        ...action.payload,
+        ...state,
+        status: 'loggingIn',
+      };
+    }
+    case USER.LOGIN_SUCCESS: {
+      return {
+        status: 'loggedIn',
+        info: action.payload,
+      };
+    }
+    case USER.LOGIN_FAULURE: {
+      return {
+        error: action.error,
       };
     }
     case USER.LOGOUT: {
       return {
-        nickname: '',
-        isAdmin: false,
-        isLoggedIn: false,
+        status: '',
+        info: null,
       };
     }
     default: {
