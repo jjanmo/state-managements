@@ -23,10 +23,20 @@ const styles = {
     fontSize: '1.2rem',
   },
   link: {
+    margin: '1rem 10px',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    margin: '1rem',
+  },
+  linkContainer: {
     position: 'absolute',
     bottom: 0,
-    left: '45%',
-    marginBottom: '1rem',
+    left: '50%',
+    transform: 'translate(-50%, 0)',
+    display: 'flex',
   },
 };
 
@@ -49,8 +59,8 @@ const Detail = () => {
   }, [posts, postID]);
 
   useEffect(() => {
-    const post = filterPost();
-    setPost(post);
+    const _post = filterPost();
+    setPost(_post);
   }, [filterPost]);
 
   const onClickDelete = useCallback(() => {
@@ -62,9 +72,18 @@ const Detail = () => {
     navigate('/', { replace: true });
   }, []);
 
+  const onClickEdit = useCallback(() => {
+    if (!user.info) {
+      alert('로그인을 해야합니다.');
+      return;
+    }
+    navigate(`/form/${postID}`);
+  }, []);
+
   return (
     <div style={styles.wrapper}>
-      <div>
+      <div style={styles.buttonContainer}>
+        <button onClick={onClickEdit}>수정</button>
         <button onClick={onClickDelete}>삭제</button>
       </div>
       <h1>
@@ -82,9 +101,11 @@ const Detail = () => {
         <br />
         {post.description}
       </p>
-      <Link style={styles.link} to="/">
-        Home
-      </Link>
+      <div style={styles.linkContainer}>
+        <Link style={styles.link} to="/">
+          Back
+        </Link>
+      </div>
     </div>
   );
 };

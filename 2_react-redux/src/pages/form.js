@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as postsActions from '../modules/actions/posts';
-import { useNavigate } from 'react-router-dom';
 
 const styles = {
   centering: {
@@ -32,13 +31,15 @@ const styles = {
 const Form = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const { id: postID } = useParams();
+  const { user, posts } = useSelector((state) => ({ user: state.user, posts: state.posts }), shallowEqual);
   const [post, setPost] = useState({
     title: '',
     description: '',
   });
 
   const { title, description } = post;
+  const filteredPost = useRef(posts.filter((post) => post.id === Number(postID))[0]);
 
   const onSubmit = useCallback(
     (e) => {
@@ -47,13 +48,22 @@ const Form = () => {
         alert('닉네임 혹은 비밀번호를 입력하세요');
         return;
       }
-      dispatch(
-        postsActions.addPost({
-          ...post,
-          id: Date.now(),
-          author: user.info.nickname,
-        })
-      );
+      if (postID) {
+        dispatch(
+          postsActions.editPost({
+            ...filteredPost,
+            ...post,
+          })
+        );
+      } else {
+        dispatch(
+          postsActions.addPost({
+            ...post,
+            id: Date.now(),
+            author: user.info.nickname,
+          })
+        );
+      }
 
       setPost({
         title: '',
@@ -75,6 +85,12 @@ const Form = () => {
     [post]
   );
 
+  useEffect(() => {
+    if (postID) {
+      setPost(filteredPost.current);
+    }
+  }, []);
+
   return (
     <div style={styles.centering}>
       <form style={styles.form} onSubmit={onSubmit}>
@@ -94,7 +110,7 @@ const Form = () => {
           value={description}
           onChange={onChange}
         />
-        <input type="submit" value="입력" />
+        <input type="submit" value={postID ? '수정' : '입력'} />
       </form>
       <Link to="/">Home</Link>
     </div>
