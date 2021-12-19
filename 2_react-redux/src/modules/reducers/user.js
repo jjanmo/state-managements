@@ -1,3 +1,4 @@
+import produce from 'immer';
 import * as USER from '../actions/user';
 
 const initialState = {
@@ -9,35 +10,33 @@ const initialState = {
   }, // { id, nickname, isAdmin }
 };
 
-const userReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case USER.LOGIN_REQUEST: {
-      return {
-        ...state,
-        status: 'loggingIn',
-      };
+const userReducer = (prevState = initialState, action) => {
+  return produce(prevState, (draft) => {
+    switch (action.type) {
+      case USER.LOGIN_REQUEST: {
+        draft.status = 'loggingIn';
+        break;
+      }
+      case USER.LOGIN_SUCCESS: {
+        draft.status = 'loggedIn';
+        draft.info = action.userInfo;
+        break;
+      }
+      case USER.LOGIN_FAULURE: {
+        return {
+          error: action.error,
+        };
+      }
+      case USER.LOGOUT: {
+        draft.status = '';
+        draft.info = null;
+        break;
+      }
+      default: {
+        return prevState;
+      }
     }
-    case USER.LOGIN_SUCCESS: {
-      return {
-        status: 'loggedIn',
-        info: action.payload,
-      };
-    }
-    case USER.LOGIN_FAULURE: {
-      return {
-        error: action.error,
-      };
-    }
-    case USER.LOGOUT: {
-      return {
-        status: '',
-        info: null,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
+  });
 };
 
 export default userReducer;

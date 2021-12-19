@@ -30,7 +30,7 @@ export const loginRequest = (data) => ({
 });
 export const loginSuccess = (userInfo) => ({
   type: LOGIN_SUCCESS,
-  payload: userInfo,
+  userInfo,
 });
 export const loginFailure = (error) => ({
   type: LOGIN_FAULURE,

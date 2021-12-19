@@ -4,13 +4,13 @@ export const EDIT_POST = 'EDIT_POST';
 
 export const addPost = (post) => ({
   type: ADD_POST,
-  payload: post,
+  post,
 });
 export const deletePost = (postID) => ({
   type: DELETE_POST,
-  payload: postID,
+  id: postID,
 });
 export const editPost = (data) => ({
   type: EDIT_POST,
-  payload: data,
+  data,
 });

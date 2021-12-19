@@ -1,3 +1,4 @@
+import produce from 'immer';
 import * as POSTS from '../actions/posts';
 
 const initialState = [
@@ -9,26 +10,29 @@ const initialState = [
   },
 ];
 
-const postsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case POSTS.ADD_POST: {
-      return [
-        ...state,
-        {
-          ...action.payload,
-        },
-      ];
+const postsReducer = (prevState = initialState, action) => {
+  return produce(prevState, (draft) => {
+    switch (action.type) {
+      case POSTS.ADD_POST: {
+        draft.push(action.post);
+        break;
+      }
+      case POSTS.DELETE_POST: {
+        const index = draft.findIndex((post) => post.id === action.id);
+        draft.splice(index, 1);
+        break;
+      }
+      case POSTS.EDIT_POST: {
+        const index = draft.findIndex((post) => post.id === action.data.id);
+        draft[index].title = action.data.title;
+        draft[index].description = action.data.description;
+        break;
+      }
+      default: {
+        return prevState;
+      }
     }
-    case POSTS.DELETE_POST: {
-      return state.filter((post) => post.id !== action.payload);
-    }
-    case POSTS.EDIT_POST: {
-      return state.map((post) => (post.id === action.payload.id ? action.payload : post));
-    }
-    default: {
-      return state;
-    }
-  }
+  });
 };
 
 export default postsReducer;
