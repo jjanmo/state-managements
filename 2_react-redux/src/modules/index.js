@@ -1,17 +1,13 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import postsReducer from './reducers/posts';
 import userReducer from './reducers/user';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   user: userReducer,
   posts: postsReducer,
 });
-
-const loggingMiddleware = (store) => (next) => (action) => {
-  console.log('✅ current action : ', action);
-
-  next(action);
-};
 
 const thunkMiddleware = (store) => (next) => (action) => {
   if (typeof action === 'function') {
@@ -21,6 +17,9 @@ const thunkMiddleware = (store) => (next) => (action) => {
   return next(action);
 };
 
-const enhancer = applyMiddleware(loggingMiddleware, thunkMiddleware);
+const enhancer =
+  process.env.NODE_ENV === 'production'
+    ? compose(applyMiddleware(logger, thunkMiddleware))
+    : composeWithDevTools(applyMiddleware(logger, thunkMiddleware));
 
 export const configure = (_) => createStore(rootReducer, _, enhancer);
