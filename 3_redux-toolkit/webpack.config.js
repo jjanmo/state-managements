@@ -28,4 +28,11 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
   },
+  devServer: {
+    hot: true,
+    static: { directory: path.resolve(__dirname, 'public') },
+    devMiddleware: {
+      publicPath: '/dist',
+    },
+  },
 };
