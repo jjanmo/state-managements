@@ -1,5 +1,17 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
+import './index.css';
+import App from './App';
+import { Provider } from 'react-redux';
+import { configure as createStore } from './modules/index';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore();
+
+ReactDOM.render(
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>,
+  document.getElementById('root')
+);
