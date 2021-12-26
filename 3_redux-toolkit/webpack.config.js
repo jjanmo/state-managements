@@ -1,4 +1,20 @@
 const path = require('path');
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+/*
+CSS관련 로더에 대한 역할
+✔️ style-loader
+→ Inject CSS into the DOM.
+
+✔️ css-loader
+→ @import and url() like import/require() and will resolve them.
+
+✔️ postcss-loader
+→ Loader to process CSS with PostCSS
+
+✔️ sass-loader
+→ Loads a Sass/SCSS file and compiles it to CSS.
+*/
 
 module.exports = {
   name: 'redux-toolkit-tutorials',
@@ -18,25 +34,30 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: [],
+            plugins: ['@babel/plugin-transform-runtime'],
           },
         },
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.module\.css$|\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
+  plugins: [new RefreshWebpackPlugin()],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
   },
+
   devServer: {
     hot: true,
-    static: { directory: path.resolve(__dirname, 'public') },
     devMiddleware: {
       publicPath: '/dist',
+    },
+    static: { directory: path.resolve(__dirname, 'public') },
+    client: {
+      logging: 'error',
     },
   },
 };
