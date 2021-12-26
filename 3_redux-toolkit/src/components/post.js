@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from '../styles/post.module.css';
 
-const Post = ({ id, title }) => {
+const Post = ({ title, author, date }) => {
   return (
-    <li>
-      <Link
-        to={{
-          pathname: `/posts/${id}`,
-        }}
-      >
-        {title}
+    <li className={styles.item}>
+      <Link className={styles.link} to="/sadfasf">
+        <div className={styles.title}>{title}</div>
+        <div className={styles.info}>{`${author} | ${date}`}</div>
       </Link>
     </li>
   );
