@@ -1,75 +1,46 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as userActions from '../modules/actions/user';
+import styles from '../styles/header.module.css';
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const [userData, setUserData] = useState({
-    nickname: '',
-    password: '',
-  });
-
-  const { nickname, password } = userData;
-
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (!nickname || !password) {
-        alert('닉네임 혹은 비밀번호를 입력하세요');
-        return;
-      }
-      dispatch(userActions.loginAsync(userData));
-      setUserData({
-        nickname: '',
-        password: '',
-      });
-    },
-    [nickname, password]
-  );
-
-  const onChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setUserData({
-        ...userData,
-        [name]: value,
-      });
-    },
-    [userData]
-  );
-
-  const onClickLogout = useCallback(() => {
-    dispatch(userActions.logout());
-  }, []);
+  const [loggedIn, isLoggedIn] = useState(true);
 
   return (
-    <div>
-      {!user.status ? (
-        <h1>로그인을 해주세요</h1>
-      ) : user.status === 'loggedIn' ? (
-        <h1>현재 유저 : {user.info.nickname}</h1>
-      ) : (
-        <h1>로그인 중입니다.</h1>
-      )}
-      {user.status === 'loggedIn' ? (
-        <>
-          <p>
-            <Link to="/form">글쓰기</Link>
-          </p>
-          <button onClick={onClickLogout}>로그아웃</button>
-        </>
-      ) : (
-        <form onSubmit={onSubmit}>
-          <p>
-            <input type="text" name="nickname" placeholder="닉네임" value={nickname} onChange={onChange} />
-            <input type="password" name="password" placeholder="비밀번호" value={password} onChange={onChange} />
-          </p>
-          <input type="submit" value="로그인" />
-        </form>
-      )}
-    </div>
+    <>
+      <div className={styles.container}>
+        {loggedIn ? (
+          <>
+            <div className={styles.searchContainer}>
+              <div className={styles.result}>
+                <span className={styles.name}>JJanmo</span>
+                님의 포스트 : <button className={styles.count}>200</button>개
+              </div>
+              <input className={styles.input} type="text" placeholder="포스트 검색" />
+            </div>
+            <div className={styles.userInfoContainer}>
+              <div>
+                <button>JJanmo</button>님
+              </div>
+              <div>jjanmo@hanmail.net</div>
+              <button className={styles.button}>로그아웃</button>
+            </div>
+          </>
+        ) : (
+          <div>
+            <h1 className={styles.title}>헬로우 포스트</h1>
+            <div className={styles.linkContainer}>
+              <Link className={styles.link} to="/login">
+                로그인
+              </Link>
+              <Link className={styles.link} to="/join">
+                회원가입
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className={styles.line} />
+    </>
   );
 };
 
