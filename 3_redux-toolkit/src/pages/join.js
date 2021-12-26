@@ -13,6 +13,7 @@ const Join = () => {
         <input className={styles.input} type="password" placeholder="비밀번호 확인" />
         <button className={styles.button}>가입하기</button>
       </form>
+      or
       <div className={styles.linkContainer}>
         <Link className={styles.link} to="/login">
           로그인

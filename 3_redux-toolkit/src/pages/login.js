@@ -12,9 +12,14 @@ const Login = () => {
         <button className={styles.button}>로그인</button>
       </form>
       or
-      <Link className={styles.link} to="/join">
-        회원가입
-      </Link>
+      <div className={styles.linkContainer}>
+        <Link className={styles.link} to="/join">
+          회원가입
+        </Link>
+        <Link className={styles.link} to="/">
+          홈
+        </Link>
+      </div>
     </div>
   );
 };
