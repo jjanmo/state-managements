@@ -1,0 +1,17 @@
+@import url('./reset.css');
+
+body {
+  height: 100vh;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 450px;
+  height: 700px;
+  background-color: #c7ecee;
+  border-radius: 10px;
+}
