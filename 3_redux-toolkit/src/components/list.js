@@ -29,7 +29,7 @@ const List = () => {
       date: '2022.01.01',
     },
     {
-      id: 4,
+      id: 5,
       title: '헬로우 리덕스 툴킷!!!',
       author: 'JJanmo',
       date: '2021.12.28',
