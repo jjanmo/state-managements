@@ -1,22 +1,12 @@
 import React from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-import Detail from './pages/detail';
-import Form from './pages/form';
-import Home from './pages/home';
+import AppRouter from './appRouter';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/posts/:id" element={<Detail />} />
-          <Route path="/form" element={<Form />} />
-          <Route path="/form/:id" element={<Form />} />
-        </Routes>
-      </Router>
-    </div>
+    <>
+      <AppRouter />
+    </>
   );
-}
+};
 
 export default App;
