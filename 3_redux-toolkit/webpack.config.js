@@ -1,5 +1,6 @@
 const path = require('path');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 /*
 CSS관련 로더에 대한 역할
@@ -44,7 +45,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [new RefreshWebpackPlugin()],
+  plugins: [new RefreshWebpackPlugin(), new Dotenv()],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
