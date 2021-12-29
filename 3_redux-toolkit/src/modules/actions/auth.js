@@ -7,6 +7,8 @@ export const SIGNUP_PENDING = 'SIGNUP_PENDING';
 export const SIGNUP_FULFILLED = 'SIGNUP_FULFILLED';
 export const SIGNUP_REJECTED = 'SIGNUP_REJECTED';
 export const LOGOUT = 'LOGOUT';
+export const SET_MESSAGE = 'SET_MESSAGE';
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
 export const loginPending = () => ({
   type: LOGIN_PENDING,
@@ -30,10 +32,16 @@ export const signupRejected = (error) => ({
   type: SIGNUP_REJECTED,
   payload: error,
 });
+export const setMessage = (message) => ({
+  type: SET_MESSAGE,
+  payload: message,
+});
+export const clearMessage = () => ({
+  type: CLEAR_MESSAGE,
+});
 
 export const login = (data) => async (dispatch) => {
   dispatch(loginPending());
-
   try {
     const response = await loginAPI(data);
     if (response.status === 200) {
@@ -46,16 +54,17 @@ export const login = (data) => async (dispatch) => {
   }
 };
 
-// export const signup = () => async (dispatch) => {
-//   dispatch(signupPending());
-
-//   try {
-//     const response = await signupAPI(data);
-//     console.log(response);
-//   } catch (e) {
-//     dispatch(signupRejected(e));
-//   }
-// };
+export const signup = (data) => async (dispatch) => {
+  dispatch(signupPending());
+  try {
+    const response = await signupAPI(data);
+    if (response.status === 201) {
+      dispatch(setMessage(response.statusText));
+    }
+  } catch (e) {
+    dispatch(signupRejected(e));
+  }
+};
 
 export const logout = () => (dispatch) => {
   removeToken();

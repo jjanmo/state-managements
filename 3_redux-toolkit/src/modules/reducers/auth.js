@@ -5,6 +5,7 @@ const initialState = {
   isLoggedIn: false,
   user: null,
   error: null,
+  message: '',
 };
 /*
 user : {
@@ -39,6 +40,14 @@ const authReducer = (prevState = initialState, action) => {
         draft.isLoggedIn = false;
         draft.user = null;
         error.null;
+        break;
+      }
+      case AUTH.SET_MESSAGE: {
+        draft.message = payload;
+        break;
+      }
+      case AUTH.CLEAR_MESSAGE: {
+        draft.message = '';
         break;
       }
       default: {
