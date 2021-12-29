@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as authActions from '../modules/actions/auth';
 import styles from '../styles/header.module.css';
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const onClickLogout = useCallback(() => {
+    dispatch(authActions.logout());
+  }, []);
+
   return (
     <div className={styles.lContainer}>
       <div className={styles.searchContainer}>
@@ -16,7 +24,9 @@ const Header = () => {
           <button>JJanmo</button>님
         </div>
         <div>jjanmo@hanmail.net</div>
-        <button className={styles.button}>로그아웃</button>
+        <button className={styles.button} onClick={onClickLogout}>
+          로그아웃
+        </button>
       </div>
     </div>
   );

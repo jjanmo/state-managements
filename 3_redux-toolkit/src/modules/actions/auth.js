@@ -53,7 +53,6 @@ export const login = (data) => async (dispatch) => {
     dispatch(loginRejected(e));
   }
 };
-
 export const signup = (data) => async (dispatch) => {
   dispatch(signupPending());
   try {
@@ -65,7 +64,6 @@ export const signup = (data) => async (dispatch) => {
     dispatch(signupRejected(e));
   }
 };
-
 export const logout = () => (dispatch) => {
   removeToken();
   dispatch({ type: LOGOUT });

@@ -12,8 +12,10 @@ const Home = () => {
   useEffect(() => {
     if (user) {
       setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
     }
-  }, []);
+  }, [user]);
 
   return (
     <>

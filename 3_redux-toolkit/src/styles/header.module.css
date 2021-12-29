@@ -1,20 +1,18 @@
-.container {
+/* not login */
+.nContainer {
   width: 94%;
   margin: 0 3%;
   height: 120px;
-  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
-
-/* not login */
 .title {
   font-size: 2rem;
   font-weight: bold;
   color: #130f40;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .linkContainer {
   display: flex;
@@ -32,6 +30,17 @@
 }
 
 /* login */
+.lContainer {
+  width: 94%;
+  margin: 0 3%;
+  height: 120px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* search */
 .searchContainer {
   width: 65%;

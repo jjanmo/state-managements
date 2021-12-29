@@ -39,7 +39,8 @@ const authReducer = (prevState = initialState, action) => {
       case AUTH.LOGOUT: {
         draft.isLoggedIn = false;
         draft.user = null;
-        error.null;
+        draft.error = null;
+        draft.message = '';
         break;
       }
       case AUTH.SET_MESSAGE: {
