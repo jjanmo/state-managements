@@ -3,10 +3,11 @@ import logger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import authReducer from './reducers/auth';
+import postsReducer from './reducers/posts';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  // posts: postsSlice.reducer,
+  posts: postsReducer,
 });
 
 const enhancer =
