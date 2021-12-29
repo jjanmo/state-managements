@@ -36,7 +36,7 @@ const postsReducer = (prevState = initialState, action) => {
       case POSTS.ADD_POST_FULFILLED:
       case POSTS.EDIT_POST_FULFILLED:
       case POSTS.DELETE_POST_FULFILLED: {
-        //message?
+        draft.message = payload;
         break;
       }
 

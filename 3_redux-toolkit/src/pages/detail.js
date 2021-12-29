@@ -1,21 +1,76 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import * as postsActions from '../modules/actions/posts';
 import styles from '../styles/detail.module.css';
 
-const Detail = ({ title = '헬로우 포스트 헬로우 블로그', author = 'Michael', date = '2022.01.01' }) => {
-  const description = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`;
+const Detail = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { posts, message } = useSelector(
+    (state) => ({
+      posts: state.posts.data,
+      message: state.posts.message,
+    }),
+    shallowEqual
+  );
+
+  const user = useSelector((state) => state.auth.user);
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    const _post = posts.filter((post) => post.id === Number(id))[0];
+    setPost(_post);
+  }, []);
+
+  useEffect(() => {
+    if (message === 'Deleted') {
+      alert(message);
+      navigate('/', { replace: true });
+    }
+
+    return () => {
+      dispatch(postsActions.clearMessage());
+    };
+  }, [message]);
+
+  const onClickEdit = useCallback(() => {
+    navigate('/form', { state: id });
+  }, [id]);
+  const onClickDelete = useCallback(() => {
+    dispatch(postsActions.deletePost(id));
+  }, [id]);
+  const onClickHome = useCallback(() => {
+    navigate('/');
+  }, []);
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{title}</h1>
-      <div className={styles.info}>
-        <div>{`${author} | ${date}`}</div>
-      </div>
-      <div className={styles.description}>{description}</div>
-      <div className={styles.buttonContainer}>
-        <button className={styles.editButton}>수정</button>
-        <button className={styles.homeButton}>홈</button>
-        <button className={styles.deleteButton}>삭제</button>
-      </div>
+      {post && (
+        <>
+          <h1 className={styles.title}>{post.title}</h1>
+          <div className={styles.info}>
+            <div>{`${post.author} | ${post.date}`}</div>
+          </div>
+          <div className={styles.description}>{post.description}</div>
+          <div className={styles.buttonContainer}>
+            {user && (
+              <button className={styles.editButton} onClick={onClickEdit}>
+                수정
+              </button>
+            )}
+            <button className={styles.homeButton} onClick={onClickHome}>
+              홈
+            </button>
+            {user && (
+              <button className={styles.deleteButton} onClick={onClickDelete}>
+                삭제
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

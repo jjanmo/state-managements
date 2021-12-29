@@ -1,4 +1,4 @@
-import { getPostsAPI } from '../../api/posts';
+import { getPostsAPI, deletePostAPI } from '../../api/posts';
 
 export const GET_POSTS_PENDING = 'GET_POSTS_PENDING';
 export const GET_POSTS_FULFILLED = 'GET_POSTS_FULFILLED';
@@ -30,8 +30,9 @@ export const getPostsRejected = (error) => ({
 export const addPostPending = () => ({
   type: ADD_POST_PENDING,
 });
-export const addPostFufilled = () => ({
+export const addPostFufilled = (message) => ({
   type: ADD_POST_FULFILLED,
+  payload: message,
 });
 export const addPostRejected = (error) => ({
   type: ADD_POST_REJECTED,
@@ -41,8 +42,9 @@ export const addPostRejected = (error) => ({
 export const deletePostPending = () => ({
   type: DELETE_POST_PENDING,
 });
-export const deletePostFufilled = () => ({
+export const deletePostFufilled = (message) => ({
   type: DELETE_POST_FULFILLED,
+  payload: message,
 });
 export const deletePostRejected = (error) => ({
   type: DELETE_POST_REJECTED,
@@ -52,8 +54,9 @@ export const deletePostRejected = (error) => ({
 export const editPostPending = () => ({
   type: EDIT_POST_PENDING,
 });
-export const editPostFufilled = () => ({
+export const editPostFufilled = (message) => ({
   type: EDIT_POST_FULFILLED,
+  payload: message,
 });
 export const editPostRejected = (error) => ({
   type: EDIT_POST_REJECTED,
@@ -70,7 +73,6 @@ export const clearMessage = () => ({
 
 export const getPosts = () => async (dispatch) => {
   dispatch(getPostsPending());
-
   try {
     const response = await getPostsAPI();
     if (response.status === 200) {
@@ -78,5 +80,16 @@ export const getPosts = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch(getPostsRejected(error));
+  }
+};
+export const deletePost = (id) => async (dispatch) => {
+  dispatch(deletePostPending());
+  try {
+    const response = await deletePostAPI(id);
+    if (response.status === 200) {
+      dispatch(deletePostFufilled('Deleted'));
+    }
+  } catch (error) {
+    dispatch(deletePostRejected(error));
   }
 };
