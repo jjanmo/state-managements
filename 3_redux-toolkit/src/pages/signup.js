@@ -51,6 +51,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (message === 'Created') {
+      alert('가입이 완료되었습니다. 다시 로그인을 해주세요.');
       navigate('/login', { replace: true });
     }
 

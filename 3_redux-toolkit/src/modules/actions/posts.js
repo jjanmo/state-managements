@@ -1,4 +1,4 @@
-import { getPostsAPI, deletePostAPI } from '../../api/posts';
+import { getPostsAPI, deletePostAPI, addPostAPI } from '../../api/posts';
 
 export const GET_POSTS_PENDING = 'GET_POSTS_PENDING';
 export const GET_POSTS_FULFILLED = 'GET_POSTS_FULFILLED';
@@ -91,5 +91,16 @@ export const deletePost = (id) => async (dispatch) => {
     }
   } catch (error) {
     dispatch(deletePostRejected(error));
+  }
+};
+export const addPost = (data) => async (dispatch) => {
+  dispatch(addPostPending());
+  try {
+    const response = await addPostAPI(data);
+    if (response.status === 201) {
+      dispatch(setMessage(response.statusText));
+    }
+  } catch (error) {
+    dispatch(addPostRejected(error));
   }
 };

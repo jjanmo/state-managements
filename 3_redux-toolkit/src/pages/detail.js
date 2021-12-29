@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as postsActions from '../modules/actions/posts';
 import styles from '../styles/detail.module.css';
+import { getDateStr } from '../utils/functions';
 
 const Detail = () => {
   const { id } = useParams();
@@ -51,7 +52,7 @@ const Detail = () => {
         <>
           <h1 className={styles.title}>{post.title}</h1>
           <div className={styles.info}>
-            <div>{`${post.author} | ${post.date}`}</div>
+            <div>{`${post.author} | ${getDateStr(post.date)}`}</div>
           </div>
           <div className={styles.description}>{post.description}</div>
           <div className={styles.buttonContainer}>

@@ -13,6 +13,7 @@ const initialState = {
     - author
     - title
     - description
+    - date
     }
   ]
 */
