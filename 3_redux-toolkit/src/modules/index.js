@@ -1,25 +1,19 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import postsReducer from './reducers/posts';
-import userReducer from './reducers/user';
 import logger from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import messageReducer from './reducers/message';
+import authReducer from './reducers/auth';
 
 const rootReducer = combineReducers({
-  user: userReducer,
-  posts: postsReducer,
+  auth: authReducer,
+  message: messageReducer,
+  // posts: postsSlice.reducer,
 });
-
-const thunkMiddleware = (store) => (next) => (action) => {
-  if (typeof action === 'function') {
-    return action(store.dispatch, store.getState);
-  }
-
-  return next(action);
-};
 
 const enhancer =
   process.env.NODE_ENV === 'production'
-    ? compose(applyMiddleware(logger, thunkMiddleware))
-    : composeWithDevTools(applyMiddleware(logger, thunkMiddleware));
+    ? compose(applyMiddleware(logger, ReduxThunk))
+    : composeWithDevTools(applyMiddleware(logger, ReduxThunk));
 
-export const configure = (_) => createStore(rootReducer, _, enhancer);
+export const configure = () => createStore(rootReducer, enhancer);

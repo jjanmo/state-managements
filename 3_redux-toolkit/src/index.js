@@ -1,12 +1,20 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { Provider } from 'react-redux';
+import { configure as createStore } from './modules';
+
 import './styles/reset.css';
 import './styles/global.css';
 
+const store = createStore();
+console.log('✅', store.getState());
+
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
   document.getElementById('root')
 );
