@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as authActions from '../modules/actions/auth';
 import styles from '../styles/header.module.css';
 
@@ -17,7 +18,10 @@ const Header = () => {
           <span className={styles.name}>JJanmo</span>
           님의 포스트 : <button className={styles.count}>200</button>개
         </div>
-        <input className={styles.input} type="text" placeholder="포스트 검색" />
+        {/* <input className={styles.input} type="text" placeholder="포스트 검색" /> */}
+        <Link className={styles.link} to="/form">
+          포스트 추가
+        </Link>
       </div>
       <div className={styles.userInfoContainer}>
         <div>
