@@ -27,9 +27,12 @@ const authReducer = (prevState = initialState, action) => {
         break;
       }
       case AUTH.LOGIN_PENDING:
-      case AUTH.SIGNUP_PENDING:
-      case AUTH.SIGNUP_FULFILLED: {
+      case AUTH.SIGNUP_PENDING: {
         draft.isLoggedIn = false;
+        break;
+      }
+      case AUTH.SIGNUP_FULFILLED: {
+        draft.message = payload;
         break;
       }
       case AUTH.LOGIN_REJECTED:
@@ -41,10 +44,6 @@ const authReducer = (prevState = initialState, action) => {
         draft.user = null;
         draft.error = null;
         draft.message = '';
-        break;
-      }
-      case AUTH.SET_MESSAGE: {
-        draft.message = payload;
         break;
       }
       case AUTH.CLEAR_MESSAGE: {

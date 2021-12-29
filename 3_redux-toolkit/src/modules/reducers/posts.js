@@ -49,10 +49,6 @@ const postsReducer = (prevState = initialState, action) => {
         break;
       }
 
-      case POSTS.SET_MESSAGE: {
-        draft.message = payload;
-        break;
-      }
       case POSTS.CLEAR_MESSAGE: {
         draft.message = '';
         break;

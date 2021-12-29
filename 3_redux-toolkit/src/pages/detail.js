@@ -27,7 +27,7 @@ const Detail = () => {
 
   useEffect(() => {
     if (message === 'Deleted') {
-      alert(message);
+      alert('포스트가 삭제되었습니다.');
       navigate('/', { replace: true });
     }
 

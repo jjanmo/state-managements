@@ -1,19 +1,27 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as postsActions from '../modules/actions/posts';
 import styles from '../styles/form.module.css';
 
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const postID = useRef(location.state);
   const user = useSelector((state) => state.auth.user);
-  const message = useSelector((state) => state.posts.message);
+  const { message, posts } = useSelector(
+    (state) => ({
+      message: state.posts.message,
+      posts: state.posts.data,
+    }),
+    shallowEqual
+  );
+
   const [post, setPost] = useState({
     title: '',
     description: '',
   });
-
   const { title, description } = post;
 
   const onSubmit = useCallback(
@@ -24,21 +32,30 @@ const Form = () => {
         return;
       }
 
-      const body = {
-        author: user.nickname,
-        title,
-        description,
-        date: Date.now(),
-      };
-      dispatch(postsActions.addPost(body));
+      if (postID.current) {
+        const body = {
+          id: postID.current,
+          data: {
+            title,
+            description,
+          },
+        };
+        dispatch(postsActions.editPost(body));
+      } else {
+        const body = {
+          author: user.nickname,
+          title,
+          description,
+          date: Date.now(),
+        };
+        dispatch(postsActions.addPost(body));
+      }
     },
     [post]
   );
-
   const onChange = useCallback(
     (e) => {
       const { name, value } = e.target;
-
       setPost({
         ...post,
         [name]: value,
@@ -46,14 +63,23 @@ const Form = () => {
     },
     [post]
   );
-
   const onClickCancel = useCallback(() => {
     navigate(-1);
   }, []);
 
   useEffect(() => {
+    if (postID.current) {
+      const _post = posts.filter((post) => post.id === Number(postID.current))[0];
+      setPost(_post);
+    }
+  }, []);
+
+  useEffect(() => {
     if (message === 'Created') {
       alert('포스트가 추가되었습니다.');
+      navigate('/', { replace: true });
+    } else if (message === 'Edited') {
+      alert('포스트가 수정되었습니다.');
       navigate('/', { replace: true });
     }
 
@@ -64,7 +90,7 @@ const Form = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>포스트</h1>
+      <h1 className={styles.title}>{`포스트 ${location.state ? '수정' : '추가'}`}</h1>
       <form className={styles.form} onSubmit={onSubmit}>
         <input
           className={styles.input}
