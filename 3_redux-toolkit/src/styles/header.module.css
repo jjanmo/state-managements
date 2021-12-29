@@ -43,7 +43,7 @@
 }
 .result {
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .name {
   color: #2980b9;
@@ -63,9 +63,10 @@
   width: 80%;
   outline: none;
   border-radius: 10px;
-  padding: 10px;
+  padding: 5px 10px;
   background-color: #eee;
   border: 1px solid #22a6b3;
+  font-size: 1rem;
 }
 
 /* user */
@@ -74,10 +75,11 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-end;
   font-size: 13px;
   padding-right: 10px;
+  padding-bottom: 5px;
 }
 .userInfoContainer > div {
   margin: 3px;
@@ -91,6 +93,9 @@
 }
 .userInfoContainer > div:first-child > button:hover {
   font-weight: bold;
+}
+.userInfoContainer > div:nth-child(2) {
+  font-size: 13px;
 }
 
 /* logout button */
