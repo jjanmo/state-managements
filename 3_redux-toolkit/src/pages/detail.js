@@ -56,7 +56,7 @@ const Detail = () => {
           </div>
           <div className={styles.description}>{post.description}</div>
           <div className={styles.buttonContainer}>
-            {user && (
+            {user.nickname === posts.author && (
               <button className={styles.editButton} onClick={onClickEdit}>
                 수정
               </button>
@@ -64,7 +64,7 @@ const Detail = () => {
             <button className={styles.homeButton} onClick={onClickHome}>
               홈
             </button>
-            {user && (
+            {user.nickname === posts.author && (
               <button className={styles.deleteButton} onClick={onClickDelete}>
                 삭제
               </button>
