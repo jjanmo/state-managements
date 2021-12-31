@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../modules/actions/auth';
-import authSlice from '../modules/slice/auth';
+import authSlice from '../modules/slices/auth';
 import styles from '../styles/uForm.module.css';
 
 const SignUp = () => {

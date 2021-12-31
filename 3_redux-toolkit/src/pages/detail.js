@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import * as postsActions from '../modules/actions/posts';
-import styles from '../styles/detail.module.css';
+import postsSlice from '../modules/slices/posts';
+import { deletePost } from '../modules/actions/posts';
 import { getDateStr } from '../utils/functions';
+import styles from '../styles/detail.module.css';
 
 const Detail = () => {
   const { id } = useParams();
@@ -32,7 +33,7 @@ const Detail = () => {
     }
 
     return () => {
-      dispatch(postsActions.clearMessage());
+      dispatch(postsSlice.actions.clearMessage());
     };
   }, [message]);
 
@@ -40,7 +41,7 @@ const Detail = () => {
     navigate('/form', { state: id });
   }, [id]);
   const onClickDelete = useCallback(() => {
-    dispatch(postsActions.deletePost(id));
+    dispatch(deletePost(id));
   }, [id]);
   const onClickHome = useCallback(() => {
     navigate('/');
@@ -56,7 +57,7 @@ const Detail = () => {
           </div>
           <div className={styles.description}>{post.description}</div>
           <div className={styles.buttonContainer}>
-            {user.nickname === posts.author && (
+            {user?.nickname === post?.author && (
               <button className={styles.editButton} onClick={onClickEdit}>
                 수정
               </button>
@@ -64,7 +65,7 @@ const Detail = () => {
             <button className={styles.homeButton} onClick={onClickHome}>
               홈
             </button>
-            {user.nickname === posts.author && (
+            {user?.nickname === post?.author && (
               <button className={styles.deleteButton} onClick={onClickDelete}>
                 삭제
               </button>

@@ -3,7 +3,7 @@ import * as authAPI from '../../api/auth';
 
 export const login = createAsyncThunk('auth/login', async (data) => {
   const response = await authAPI.login(data);
-  return response.data;
+  return response.data.user;
 });
 
 export const signup = createAsyncThunk('auth/signup', async (data) => {

@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import * as postsActions from '../modules/actions/posts';
+import postsSlice from '../modules/slices/posts';
+import { addPost, editPost } from '../modules/actions/posts';
 import styles from '../styles/form.module.css';
 
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const postID = useRef(location.state);
+  const { state: postID } = useLocation();
   const user = useSelector((state) => state.auth.user);
   const { message, posts } = useSelector(
     (state) => ({
@@ -32,15 +32,15 @@ const Form = () => {
         return;
       }
 
-      if (postID.current) {
+      if (postID) {
         const body = {
-          id: postID.current,
+          id: Number(postID),
           data: {
             title,
             description,
           },
         };
-        dispatch(postsActions.editPost(body));
+        dispatch(editPost(body));
       } else {
         const body = {
           author: user.nickname,
@@ -48,7 +48,7 @@ const Form = () => {
           description,
           date: Date.now(),
         };
-        dispatch(postsActions.addPost(body));
+        dispatch(addPost(body));
       }
     },
     [post]
@@ -68,8 +68,8 @@ const Form = () => {
   }, []);
 
   useEffect(() => {
-    if (postID.current) {
-      const _post = posts.filter((post) => post.id === Number(postID.current))[0];
+    if (postID) {
+      const _post = posts.filter((post) => post.id === Number(postID))[0];
       setPost(_post);
     }
   }, []);
@@ -84,13 +84,13 @@ const Form = () => {
     }
 
     return () => {
-      dispatch(postsActions.clearMessage());
+      dispatch(postsSlice.actions.clearMessage());
     };
   }, [message]);
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{`포스트 ${location.state ? '수정' : '추가'}`}</h1>
+      <h1 className={styles.title}>{`포스트 ${postID ? '수정' : '추가'}`}</h1>
       <form className={styles.form} onSubmit={onSubmit}>
         <input
           className={styles.input}

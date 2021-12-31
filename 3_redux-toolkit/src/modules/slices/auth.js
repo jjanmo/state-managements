@@ -8,12 +8,9 @@ const initialState = {
   message: '',
 };
 
-function isPendingAction(action) {
-  return action.type.endsWith('pending');
-}
-function isRejectedAction(action) {
-  return action.type.endsWith('rejected');
-}
+const isPendingAction = (action) => action.type.endsWith('pending');
+const isRejectedAction = (action) => action.type.endsWith('rejected');
+
 // reducers : 동기적인 작업위한 공간
 // extraReducers : 비동기적인 작업을 위한 공간
 const authSlice = createSlice({
