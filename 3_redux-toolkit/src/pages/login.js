@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as authActions from '../modules/actions/auth';
+import { login } from '../modules/actions/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../styles/uForm.module.css';
 
@@ -19,8 +19,7 @@ const Login = () => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-
-      dispatch(authActions.login(userInfo));
+      dispatch(login(userInfo));
     },
     [userInfo]
   );
