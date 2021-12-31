@@ -1,30 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import authSlice from '../modules/slice/auth';
+import authSlice from '../modules/slices/auth';
 import styles from '../styles/header.module.css';
 
-const Header = () => {
+const Header = ({ nickname, email, count }) => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.data);
-  const user = useSelector((state) => state.auth.user);
-  const [count, setCount] = useState(0);
 
   const onClickLogout = useCallback(() => {
     dispatch(authSlice.actions.logout());
   }, []);
 
-  useEffect(() => {
-    const name = user.nickname;
-    const _count = posts.filter((post) => post.author === name).length;
-    setCount(_count);
-  }, [posts]);
-
   return (
     <div className={styles.lContainer}>
       <div className={styles.searchContainer}>
         <div className={styles.result}>
-          <span className={styles.name}>JJanmo</span>
+          <span className={styles.name}>{nickname}</span>
           님의 포스트 : <span className={styles.count}>{count}</span>개
         </div>
         <Link className={styles.link} to="/form">
@@ -32,8 +23,8 @@ const Header = () => {
         </Link>
       </div>
       <div className={styles.userInfoContainer}>
-        <div>JJanmo</div>
-        <div>jjanmo@hanmail.net</div>
+        <div>{nickname}</div>
+        <div>{email}</div>
         <button className={styles.button} onClick={onClickLogout}>
           로그아웃
         </button>
@@ -42,4 +33,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
