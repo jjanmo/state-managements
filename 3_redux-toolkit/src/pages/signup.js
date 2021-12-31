@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authActions from '../modules/actions/auth';
+import authSlice from '../modules/reducers/auth';
 import styles from '../styles/uForm.module.css';
 
 const SignUp = () => {
@@ -56,7 +57,7 @@ const SignUp = () => {
     }
 
     return () => {
-      dispatch(authActions.clearMessage());
+      dispatch(authSlice.actions.clearMessage());
     };
   }, [message]);
 

@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { createSlice } from '@reduxjs/toolkit';
 import * as AUTH from '../actions/auth';
 
 const initialState = {
@@ -16,45 +16,63 @@ user : {
 }
 */
 
-const authReducer = (prevState = initialState, action) => {
-  const { type, payload, error } = action;
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    // auth/logout 라는 이름의 액션이 만들어진다.
+    logout(state) {
+      state.isLoggedIn = false;
+      state.user = null;
+      state.error = null;
+      state.message = '';
+    },
+    clearMessage(state) {
+      state.message = '';
+    },
+  },
+  extraReducers: {},
+});
 
-  return produce(prevState, (draft) => {
-    switch (type) {
-      case AUTH.LOGIN_FULFILLED: {
-        draft.isLoggedIn = true;
-        draft.user = payload;
-        break;
-      }
-      case AUTH.LOGIN_PENDING:
-      case AUTH.SIGNUP_PENDING: {
-        draft.isLoggedIn = false;
-        break;
-      }
-      case AUTH.SIGNUP_FULFILLED: {
-        draft.message = payload;
-        break;
-      }
-      case AUTH.LOGIN_REJECTED:
-      case AUTH.LOGIN_REJECTED: {
-        draft.error = error;
-      }
-      case AUTH.LOGOUT: {
-        draft.isLoggedIn = false;
-        draft.user = null;
-        draft.error = null;
-        draft.message = '';
-        break;
-      }
-      case AUTH.CLEAR_MESSAGE: {
-        draft.message = '';
-        break;
-      }
-      default: {
-        return prevState;
-      }
-    }
-  });
-};
+export default authSlice;
 
-export default authReducer;
+// const authReducer = (prevState = initialState, action) => {
+//   const { type, payload, error } = action;
+
+//   return produce(prevState, (draft) => {
+//     switch (type) {
+//       case AUTH.LOGIN_FULFILLED: {
+//         draft.isLoggedIn = true;
+//         draft.user = payload;
+//         break;
+//       }
+//       case AUTH.LOGIN_PENDING:
+//       case AUTH.SIGNUP_PENDING: {
+//         draft.isLoggedIn = false;
+//         break;
+//       }
+//       case AUTH.SIGNUP_FULFILLED: {
+//         draft.message = payload;
+//         break;
+//       }
+//       case AUTH.LOGIN_REJECTED:
+//       case AUTH.LOGIN_REJECTED: {
+//         draft.error = error;
+//       }
+//       case AUTH.LOGOUT: {
+//         draft.isLoggedIn = false;
+//         draft.user = null;
+//         draft.error = null;
+//         draft.message = '';
+//         break;
+//       }
+//       case AUTH.CLEAR_MESSAGE: {
+//         draft.message = '';
+//         break;
+//       }
+//       default: {
+//         return prevState;
+//       }
+//     }
+//   });
+// };

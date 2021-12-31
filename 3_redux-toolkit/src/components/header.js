@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as authActions from '../modules/actions/auth';
+import authSlice from '../modules/reducers/auth';
 import styles from '../styles/header.module.css';
 
 const Header = () => {
@@ -11,7 +12,7 @@ const Header = () => {
   const [count, setCount] = useState(0);
 
   const onClickLogout = useCallback(() => {
-    dispatch(authActions.logout());
+    dispatch(authSlice.actions.logout());
   }, []);
 
   useEffect(() => {

@@ -1,18 +1,17 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import logger from 'redux-logger';
-import ReduxThunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import authReducer from './reducers/auth';
+import authSlice from './reducers/auth';
 import postsReducer from './reducers/posts';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: authSlice.reducer,
   posts: postsReducer,
 });
 
-const enhancer =
-  process.env.NODE_ENV === 'production'
-    ? compose(applyMiddleware(logger, ReduxThunk))
-    : composeWithDevTools(applyMiddleware(logger, ReduxThunk));
-
-export const configure = () => createStore(rootReducer, enhancer);
+export const configure = () =>
+  configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    devTools: process.env.NODE_ENV !== 'production',
+  });

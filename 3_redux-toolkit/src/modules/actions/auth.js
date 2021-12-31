@@ -6,8 +6,6 @@ export const LOGIN_REJECTED = 'LOGIN_REJECTED';
 export const SIGNUP_PENDING = 'SIGNUP_PENDING';
 export const SIGNUP_FULFILLED = 'SIGNUP_FULFILLED';
 export const SIGNUP_REJECTED = 'SIGNUP_REJECTED';
-export const LOGOUT = 'LOGOUT';
-export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
 export const loginPending = () => ({
   type: LOGIN_PENDING,
@@ -30,9 +28,6 @@ export const signupFulfilled = (data) => ({
 export const signupRejected = (error) => ({
   type: SIGNUP_REJECTED,
   payload: error,
-});
-export const clearMessage = () => ({
-  type: CLEAR_MESSAGE,
 });
 
 export const login = (data) => async (dispatch) => {
@@ -58,10 +53,6 @@ export const signup = (data) => async (dispatch) => {
   } catch (e) {
     dispatch(signupRejected(e));
   }
-};
-export const logout = () => (dispatch) => {
-  removeToken();
-  dispatch({ type: LOGOUT });
 };
 
 export const getToken = () => localStorage.getItem('token');
