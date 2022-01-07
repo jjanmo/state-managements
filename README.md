@@ -31,13 +31,40 @@
 
 ## React Redux
 
-### react-redux의 역할
+리액트 리덕스가 무엇일까? 리덕스와 리액트 리덕스는 무엇이 다르길래 우리는 리덕스 뿐만 아니라 리액트 리덕스도 알아야할까?
 
-### middleware의 구조
+### middleware
+
+> 미들웨어는 리덕스 흐름상 어디에 위치하는지 다이어그램을 통해서 살펴보자.
+
+![middleware](./screenshots/middleware.png)
+
+리덕스에서 미들웨어가 1)무엇이고 이것이 2)왜 필요한지 알아보자. 나아가 코드적으로 3)어떻게 동작하는지에 대해서 살펴보자.
 
 ## Redux Toolkit
 
-> react-redux 파트에서 만들었던 단순한 블로그 앱을 redux-toolkit을 이용하여 리팩토링 해보자.
+<details>
+<summary>Features</summary>
+
+- [x] apply redux-toolkit ⭐️
+- [x] posts CRUD
+- mock server
+  - [x] fake server 설정 : use json-server
+  - [x] user : login/signup : use json-server-auth
+- [x] CSS module system
+- [ ] loading middleware
+</details>
+
+### API
+
+- configureStore
+- createSlice
+- createAsyncThunk
+- createSelector
+
+## Redux Saga
+
+## MobX
 
 # 라이브러리 비교
 
