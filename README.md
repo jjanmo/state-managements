@@ -43,8 +43,14 @@
 
 ## Redux Toolkit
 
+> 리덕스 툴킷을 이용한 `CRUD 앱`을 구현해보자.
+
+> Preview
+
+![preview](/screenshots/3_preview.gif)
+
 <details>
-<summary>Features</summary>
+  <summary>Features</summary>
 
 - [x] apply redux-toolkit ⭐️
 - [x] posts CRUD
@@ -53,9 +59,11 @@
   - [x] user : login/signup : use json-server-auth
 - [x] CSS module system
 - [ ] loading middleware
+- [ ] join/login validataion
+- [x] apply concurrently
 </details>
 
-### API
+### Redux Toolkit API 정리
 
 - configureStore
 - createSlice
