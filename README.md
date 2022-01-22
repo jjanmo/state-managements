@@ -65,22 +65,36 @@
 
 ### Redux Toolkit API 정리
 
-- configureStore
-- createSlice
-- createAsyncThunk
-- createSelector
+<details>
+  <summary>APIs</summary>
+
+- [createAction](./docs/redux-toolkit-api.md#createAction)
+- [createReducer](./docs/redux-toolkit-api.md#createReducer)
+
+</details>
 
 ## Redux Saga
 
 ## MobX
 
-# 라이브러리 비교
+> 간단한 카운터를 바닐라 자바스크립트와 MobX 조합으로 만들면서 MobX를 알아보자.
 
-|     | Redux | MobX | Recoil |
-| :-: | :---: | :--: | :----: |
+Redux 다음으로 알려진 상태관리 라이브러리는 `MobX`이다. (두번째라고 해서 두번째로 좋다는 건 아니다. 개발환경에 따라서 맞는 기술을 사용하면 되는 것!!)
 
-## Ref
+## MobX React
+
+> 리액트에서 MobX를 이용한 간단한 TodoApp을 통해서 리액트에서 MobX의 사용방법에 대해서 알아보자.
+
+## Recoil
+
+# Ref
+
+- [📺 Redux vs MobX](https://www.inflearn.com/course/redux-mobx-%EC%83%81%ED%83%9C%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC)
+
+  > 해당 프로젝트의 모티브를 제공한 강의
 
 - [🗒 2021년 React 상태 관리 라이브러리 전쟁](https://mmsesang.tistory.com/entry/2021%EB%85%84-React-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%A0%84%EC%9F%81-Hooks-Redux-Recoil)
 
-- [📺 Redux vs MobX](https://www.inflearn.com/course/redux-mobx-%EC%83%81%ED%83%9C%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC)
+  > `상태 관리 툴` 세계의 큰 그림을 볼 수 있는 글
+
+- [🗒 Redux Toolkit 공홈](https://redux-toolkit.js.org/)
