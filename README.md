@@ -52,7 +52,7 @@
 <details>
   <summary>Features</summary>
 
-- [x] apply redux-toolkit ⭐️
+- [x] apply redux-toolkit
 - [x] posts CRUD
 - mock server
   - [x] fake server 설정 : use json-server
@@ -70,6 +70,7 @@
 
 - [createAction](./docs/redux-toolkit-api.md#createAction)
 - [createReducer](./docs/redux-toolkit-api.md#createReducer)
+- [configureStore](./docs/redux-toolkit-api.md#configureStore)
 
 </details>
 

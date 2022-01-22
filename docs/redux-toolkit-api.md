@@ -141,6 +141,98 @@ dispatch(plus(3));
 
 ## configureStore
 
+기존에 리덕스 스토어를 설정할 때, 리덕스를 좀 더 잘, 쉽게 사용하기 위해선 생각보다 많은 추가적인 미들웨어를 설치해야만 했다. 이러한 불편함을 없애기 위해서 기존의 createStore에 기능을 추가하고 추상화한 버전이 리덕스 툴킷의 `configureStore`이다.
+
+configureStore는 인자로 `옵션 객체`가 들어간다. 옵션에는 `4개의 속성`이 있는데, 그 중에서 <u>reducer만 필수요소</u>이고 나머지는 선택옵션이다. 해당 옵션들에 대해서 알아보자.
+
+- reducer
+
+  하나의 `rootReducer`를 설정한다. 일반적으로 여러 개의 리듀서를 사용하는 경우 combineReducers를 통해서 리듀서를 합쳐서 하나의 rootReducer로 설정한다.
+
+- middleware
+
+  리덕스 미들웨어를 담은 배열로서 해당 옵션을 설정하지 않으면, `getDefaultMiddleware()` 의해서 반환되는 미들웨어, 즉 기본 미들웨어가 설치된다. 기본 미들웨어는 아래와 같다.
+
+  ```js
+  // development
+  const middleware = [thunk, immutableStateInvariant, serializableStateInvariant];
+
+  // product
+  const middleware = [thunk];
+  ```
+
+  > thunk는 리덕스에서 비동기 작업을 위한 미들웨어
+
+  > immutableStateInvariant는 상태 변형을 감지하는 미들웨어
+
+  > serializableStateInvariant는 직렬화(serialize : 데이터를 다른 데이터에 맞춰 가공하는 행위)가 불가능한 값(Promise, Symbol, Map/Set, function, class instance 등)이 state나 action에 감지되면 경고해주는 미들웨어
+
+- devTools
+
+  기본적으로 불리언 값으로 설정하나 객체로 설정하는 경우, devTools에 추가적인 옵션을 설정할 수 있다. 해당 옵션의 기본값은 `true`로, 이 경우, `Redux DevTools browser extension`을 자동으로 제공하게 된다.
+
+  > Redux DevTools browser extension은 리덕스의 액션 스택의 추적을 용이하게 해주는 확장 프로그램이다. 뿐만 아니라 상태 비교/대조를 통해서 상태 관리를 좀 더 직관적이고 쉽게 할 수 있게 도와준다.
+
+- preloadedState
+
+  스토어의 추가적인 초기값을 설정하는 옵션이다.
+
+- enhancers
+
+  enhancer(기능을 증진시키는 것)라는 의미처럼 추가적으로 리덕스 스토어의 성능을 향상시키기 위한 설정이다. enhancers를 담은 배열이나 콜백함수를 통해서 커스터마이징 할 수 있다. enhancers를 어떻게 만드냐에 따라서 적용되는 순서가 달라진다.
+
+  - 배열
+
+    ```js
+      {
+        middleware,
+        devTools : true,
+        enhancers : [offline]
+      }
+
+      // 실제 최종 적용 결과
+      // [ ...middleware, offline, devToolsExtension]
+    ```
+
+  - 콜백함수
+
+    ```js
+      {
+        middleware,
+        devTools : true,
+        enhancers : (defaultEnhancers) => [offline, ...defaultEnhancers]
+      }
+
+      // 실제 최종 적용 결과
+      // [offline, ...middleware, devToolsExtension]
+    ```
+
+    > 만약에 인핸서를 미들웨어보다 먼저 적용하고 싶은 경우, 콜백을 이용할 수 있다.
+
+- configureStore을 이용한 스토어 설정 전체 코드
+
+  ```js
+  import { configureStore } from '@reduxjs/toolkit';
+  import { combineReducers } from 'redux';
+  import logger from 'redux-logger';
+  import authReducer from './reducers/auth';
+  import postsReducer from './reducers/posts';
+  import { reduxBatch } from '@manaflair/redux-batch';
+
+  const rootReducer = combineReducers({
+    auth: authReducer,
+    posts: postsReducer,
+  });
+
+  export const configure = () =>
+    configureStore({
+      reducer: rootReducer,
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+      devTools: process.env.NODE_ENV !== 'production',
+      enhancers: [reduxBatch], //enhancers 예시
+    });
+  ```
+
 ## createSlice
 
 ## createAsyncThunk
