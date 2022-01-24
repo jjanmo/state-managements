@@ -58,8 +58,6 @@
   - [x] fake server 설정 : use json-server
   - [x] user : login/signup : use json-server-auth
 - [x] CSS module system
-- [ ] loading middleware
-- [ ] join/login validataion
 - [x] apply concurrently
 </details>
 
