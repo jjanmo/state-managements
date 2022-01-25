@@ -2,7 +2,7 @@
 
 ## createAction
 
-기존의 리덕스에서는 액션 타입을 지정하고 액션 생성자 함수를 통해서 액션을 생성해서 사용하였다. 하지만 리덕스 툴킷에서는 액션 타입과 액션 생성자를 따로 만들지 않고 `createAction`이라는 함수를 통해서 한 번에 해결한다.
+기존의 리덕스에서는 액션 타입을 지정하고 액션 생성 함수를 통해서 액션을 생성해서 사용하였다. 하지만 리덕스 툴킷에서는 액션 타입과 액션 생성 함수를 따로 만들지 않고 `createAction`이라는 함수를 통해서 한 번에 해결한다.
 
 ```js
 // ✅ Before
@@ -29,7 +29,7 @@ call plus()
 */
 ```
 
-위 코드처럼 createAction를 통해서 반환된 값은 액션 생성자 함수이다. 상태 변경이 필요한 컴퍼넌트에서 해당 함수를 임포트하여 호출하면 액션이 생성되고 그 액션을 dispatch하면 기존 리덕스 흐름과 같이 상태를 변경시킬 수 있게 된다. 주석에 적어놨듯이 액션 생성자 함수는 항상 같은 형태의 액션을 반환한다. createAction에 들어가는 인자는 항상 액션의 type이 되고, 액션 생성자 함수를 실행할 때 들어가는 인자는 리덕스에 전달하는 값이 된다. payload라는 키는 정해진 값으로 전달하려는 값은 항상 payload에 할당된다. 만약에 payload를 커스터마이징하고 싶다면, createAction의 두번째 인자로 콜백 함수를 넣어주면 된다.
+위 코드처럼 createAction를 통해서 반환된 값은 액션 생성 함수이다. 상태 변경이 필요한 컴퍼넌트에서 해당 함수를 임포트하여 호출하면 액션이 생성되고 그 액션을 dispatch하면 기존 리덕스 흐름과 같이 상태를 변경시킬 수 있게 된다. 주석에 적어놨듯이 액션 생성 함수는 항상 같은 형태의 액션을 반환한다. createAction에 들어가는 인자는 항상 액션의 type이 되고, 액션 생성 함수를 실행할 때 들어가는 인자는 리덕스에 전달하는 값이 된다. payload라는 키는 정해진 값으로 전달하려는 값은 항상 payload에 할당된다. 만약에 payload를 커스터마이징하고 싶다면, createAction의 두번째 인자로 콜백 함수를 넣어주면 된다.
 
 ```js
 export const plus = createAction('counter/PLUS', (number) => {
@@ -128,7 +128,7 @@ dispatch(plus(3));
 
   - actionsMap
 
-    액션 타입이 리듀서와 맵핑되어 있는 객체로서 일반적으로 switch-case문에서 봐왔던 방식과 유사하다.(객체로 표현한다는 점만 다를뿐). 객체로 표현하기 위해서 키값을 주어야한다. 이 때 사용하는 키값이 createAction에서 생성된 생성자 함수로서 객체에 키를 동적 할당할 수 있는 문법인 `[ ]`를 통해서 구현한다.
+    액션 타입이 리듀서와 맵핑되어 있는 객체로서 일반적으로 switch-case문에서 봐왔던 방식과 유사하다.(객체로 표현한다는 점만 다를뿐). 객체로 표현하기 위해서 키값을 주어야한다. 이 때 사용하는 키값이 createAction에서 생성된 액션 생성 함수로서 객체에 키를 동적 할당할 수 있는 문법인 `[ ]`를 통해서 구현한다.
     (예전 방식처럼 액션 타입 문자열을 통해서 구현할 수도 있다.)
 
   - actionMatchers
@@ -254,6 +254,80 @@ configureStore는 인자로 `옵션 객체`가 들어간다. 옵션에는 `4개�
   ```
 
 ## createSlice
+
+리덕스 툴킷을 사용하는 이유는 바로 `createSlice`에 있다고 해도 과언이 아니다. createSlice는 앞서 설명한 createAction과 createReducer를 합쳐서 추상화시킨 것이라고 생각하면 된다. 그렇기 때문에 createSlice를 이용하면 리덕스 데이터 흐름의 모든 것을 구현할 수 있다. createSlice의 패턴을 알아보자.
+
+```js
+const slicer = createSlice({
+  name: 'counter',
+  initialState: initialState,
+  reducers: {
+    add: (state) => state + 1,
+  },
+  extraReducers: {},
+});
+
+console.log(slicer);
+/*
+    {
+      name : string,
+      reducer : ReducerFunction,
+      actions : Record<string, ActionCreator>,
+      caseReducers: Record<string, CaseReducer>.
+      getInitialState: () => State
+    }
+  */
+```
+
+createSlice는 option 객체를 인자로 받는다. 객체의 속성으로 아래에 있는 4가지를 넣을 수 있다.
+
+- name
+
+  slicer의 이름을 지정한다. 이 이름에 따라서 아래 reducer에서 만들어지는 액션 타입의 네임스페이스가 달라진다. (action type의 prefix에 해당한다.)
+
+- initialState
+
+  상태 초기값 설정
+
+- reducers
+
+  각각의 액션 타입에 따른 리듀서를 객체 안에 메소드 형태로 만들 수 있다. 위 코드를 살펴보자. reducers 객체 안에 `add: (state) => state + 1` 메소드가 있다. 여기서 add라는 키값에 의해서 매칭되는 액션 타입이 자동으로 만들어진다.(내부적으로 createAction이 작동하여, add라는 액션 생성 함수가 만들어진다.) 액션 타입은 앞에서 설정한 name 속성과 키값이 합쳐져서 `counter/add` 라는 문자열로 설정된다.
+
+  리듀서에서 작동하는 흐름을 보면, 위에서 만들어진 액션 타입에 맞는 액션이 디스패치되면 이에 상응하는 리듀서가 실행하여 상태를 변경한다.
+
+- extraReducers
+
+  reducers 속성 말고도 extraReducers이 존재하는 이유는 뭔지 생각해보자. 또한 두가지 리듀서가 어떤 부분이 다른지를 생각해보자.
+  reducers 속성은 리덕스의 동기적인 데이터 흐름, 즉, 내부에서 이루어지는 상태 변경에 대한 관리을 책임진다. 이에 반해 extraReducers는 외부에서의 리덕스의 동기적 흐름외에 비동기적 흐름이 필요한 경우 해당 리듀서를 사용할 수 있다. 예를 들어 외부와의 통신을 들 수 있다. 또한 createReducer에서 처럼 2가지 방법으로 표현할 수 있다. builder callback과 map object 방식. 여기서도 물론 builder callback 방식을 추천한다.
+
+  ```js
+  const isPendingAction = (action) => action.type.endsWith('pending');
+  const isRejectedAction = (action) => action.type.endsWith('rejected');
+
+  {
+    //...
+    extraReducers: (builder) => {
+      builder
+        .addCase('posts/getPosts/fufilled', (state, action) => {
+          state.data = action.payload;
+        })
+        .addCase('posts/addPost/fufilled', (state, action) => {
+          state.message = 'Created';
+        })
+        .addMatcher(isRejectedAction, (state, action) => {
+          state.error = action.error;
+        })
+        .addMatcher(isPendingAction, (state, action) => {
+          //....
+        })
+        .addDefaultCase((state, action) => {
+          return state;
+        });
+    };
+  }
+  ```
+
+  > 앞서 배운 createReducer와 유사한 형태를 가지고 있다. 단, 다른 점은 액션 타입 문자열에 끝에 외부 통신의 상태를 말해주는 키워드가 붙어있다는 것이다. 이 부분은 아래 `createAsyncThunk`에서 다룰 예정이다. 통신 상태는 pending(로딩), fufilled(성공), rejected(실패) 이 3가지의 상태를 가지고 있고 이에 따라서 액션 타입이 만들어지고 이에 상응하는 로직을 구현해야한다.
 
 ## createAsyncThunk
 

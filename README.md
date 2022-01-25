@@ -69,6 +69,7 @@
 - [createAction](./docs/redux-toolkit-api.md#createAction)
 - [createReducer](./docs/redux-toolkit-api.md#createReducer)
 - [configureStore](./docs/redux-toolkit-api.md#configureStore)
+- [createSlice](./docs/redux-toolkit-api.md#createSlice)
 
 </details>
 
