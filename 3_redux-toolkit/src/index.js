@@ -8,7 +8,6 @@ import './styles/reset.css';
 import './styles/global.css';
 
 const store = createStore();
-console.log('✅', store.getState());
 
 ReactDOM.render(
   <StrictMode>
