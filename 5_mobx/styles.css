@@ -34,6 +34,9 @@ h1 {
 .color:hover {
   opacity: 1;
 }
+.selected {
+  opacity: 1;
+}
 .green {
   background-color: #16a085;
 }
