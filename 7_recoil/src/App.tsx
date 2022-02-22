@@ -8,10 +8,12 @@ function App() {
   const onClickMinus = () => setCount(count - 1);
 
   return (
-    <div className="App">
+    <div className="bg-gray-200 flex items-center justify-center h-screen">
       <h1>{count}</h1>
       <div>
-        <button onClick={onClickPlus}>+</button>
+        <button className="text-red-600" onClick={onClickPlus}>
+          +
+        </button>
         <button onClick={onClickMinus}>-</button>
       </div>
     </div>
