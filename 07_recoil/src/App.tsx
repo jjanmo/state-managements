@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 import Header from './components/Header'
+import List from './components/List'
 
 function App() {
   return (
     <Container>
       <Header />
+      <List />
     </Container>
   )
 }
