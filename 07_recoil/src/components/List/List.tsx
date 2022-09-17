@@ -6,7 +6,9 @@ function List() {
   return (
     <Container>
       <Input />
-      <Todo />
+      <TodosContainer>
+        <Todo />
+      </TodosContainer>
     </Container>
   )
 }
@@ -20,4 +22,7 @@ const Container = styled.div`
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+`
+const TodosContainer = styled.div`
+  margin: 1rem 3rem;
 `
