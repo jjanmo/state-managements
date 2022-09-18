@@ -1,13 +1,37 @@
 import styled from 'styled-components'
 import Input from './List.Input'
 import Todo from './List.Todo'
+import { TodoType } from './types'
+
+const TODOS: TodoType[] = [
+  {
+    id: Date.now() * 1,
+    contents: 'Learn react 😿',
+    status: 'doing',
+    color: 'black',
+  },
+  {
+    id: Date.now() * 2,
+    contents: 'Learn redux 🙏',
+    status: 'doing',
+    color: 'black',
+  },
+  {
+    id: Date.now() * 3,
+    contents: 'Build Something fun 🚀',
+    status: 'doing',
+    color: 'black',
+  },
+]
 
 function List() {
   return (
     <Container>
       <Input />
       <TodosContainer>
-        <Todo />
+        {TODOS.map((todo) => (
+          <Todo key={todo.id} {...todo} />
+        ))}
       </TodosContainer>
     </Container>
   )

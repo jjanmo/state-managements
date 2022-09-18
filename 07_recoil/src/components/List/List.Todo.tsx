@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { TodoType } from './types'
 
-function Todo() {
+function Todo({ id, contents, status, color }: TodoType) {
   return (
     <Container>
-      <TodoInput type="checkbox" name="todo1" id="todo1" />
-      <TodoContents htmlFor="todo1">Learn React</TodoContents>
+      <TodoInput type="checkbox" name={id + contents} id={id + contents} />
+      <TodoContents htmlFor={id + contents}>{contents}</TodoContents>
 
       <select name="color">
         <option>Green</option>
