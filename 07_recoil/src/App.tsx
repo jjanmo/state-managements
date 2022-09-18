@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Filters from './components/Filters'
 import Header from './components/Header'
 import List from './components/List'
 
@@ -7,6 +8,7 @@ function App() {
     <Container>
       <Header />
       <List />
+      <Filters />
     </Container>
   )
 }
@@ -14,8 +16,8 @@ function App() {
 export default App
 
 const Container = styled.div`
-  height: 80vh;
-  max-width: 800px;
-  margin: 10vh auto;
+  height: 90vh;
+  max-width: 1000px;
+  margin: 5vh auto;
   background-color: #eee;
 `

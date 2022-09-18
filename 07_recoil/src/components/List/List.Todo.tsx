@@ -14,9 +14,7 @@ function Todo({ id, contents, status, color }: TodoType) {
         <option>Green</option>
       </select>
 
-      <div>
-        <button>X</button>
-      </div>
+      <button>X</button>
     </Container>
   )
 }
@@ -25,6 +23,8 @@ export default Todo
 
 const Container = styled.div`
   width: 100%;
+  padding: 5px 0;
+
   display: grid;
   grid-template-columns: 1fr 6rem 3rem;
   grid-column-gap: 10px;
