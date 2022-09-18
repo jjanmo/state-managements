@@ -3,10 +3,8 @@ import styled from 'styled-components'
 function Todo() {
   return (
     <Container>
-      <TodoContents htmlFor="todo1">
-        <input type="checkbox" name="todo1" id="todo1" />
-        Learn React
-      </TodoContents>
+      <TodoInput type="checkbox" name="todo1" id="todo1" />
+      <TodoContents htmlFor="todo1">Learn React</TodoContents>
 
       <select name="color">
         <option>Green</option>
@@ -36,7 +34,55 @@ const Container = styled.div`
 `
 
 const TodoContents = styled.label`
-  background-color: yellow;
+  position: relative;
+  width: 100%;
+  padding-left: 2.5rem;
+  display: flex;
+  align-items: center;
+
+  font-size: 1.5rem;
+  user-select: none;
+  cursor: pointer;
+
   &::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  &::after {
+    position: absolute;
+    content: '';
+    top: 9px;
+    left: 6px;
+
+    width: 12px;
+    height: 6px;
+    border: 3px solid white;
+    border-top: none;
+    border-right: none;
+
+    opacity: 0;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+`
+
+const TodoInput = styled.input`
+  display: none;
+
+  &:checked + ${TodoContents}::before {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+  }
+  &:checked + ${TodoContents}::after {
+    opacity: 1;
+  }
+  &:checked + ${TodoContents} {
+    text-decoration: line-through #e74c3c 2px;
   }
 `
