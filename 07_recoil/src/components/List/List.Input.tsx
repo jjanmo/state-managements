@@ -1,28 +1,44 @@
-import styled from 'styled-components'
+import React, { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import * as S from './List.style'
+import { todoListAtom } from '../../recoil/todo/atom'
 
 function Input() {
+  const [contents, setContents] = useState('')
+  const setTodoList = useSetRecoilState(todoListAtom)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    setTodoList((todoList) => [
+      ...todoList,
+      {
+        id: Date.now(),
+        contents,
+        status: 'active',
+        priority: 'normal',
+      },
+    ])
+
+    setContents('')
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setContents(value)
+  }
+
   return (
-    <Form>
-      <input type="text" placeholder="What needs to be done?" autoFocus />
-    </Form>
+    <S.Form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="What needs to be done?"
+        autoFocus
+        onChange={handleChange}
+        value={contents}
+      />
+    </S.Form>
   )
 }
 
 export default Input
-
-const Form = styled.form`
-  width: 100%;
-
-  & input {
-    width: 100%;
-    padding: 1em 1em 1em 50px;
-
-    font-size: 1.4rem;
-    border: 0;
-    outline: none;
-
-    &::placeholder {
-      color: #b2bec3;
-    }
-  }
-`

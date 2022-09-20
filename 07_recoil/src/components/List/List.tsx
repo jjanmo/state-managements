@@ -1,36 +1,17 @@
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import Filters from '../Filters'
+import { todoListAtom } from '../../recoil/todo/atom'
 import Input from './List.Input'
 import Todo from './List.Todo'
-import { TodoType } from './types'
-
-const TODOS: TodoType[] = [
-  {
-    id: Date.now() * 1,
-    contents: 'Learn react 😿',
-    status: 'active',
-    color: 'black',
-  },
-  {
-    id: Date.now() * 2,
-    contents: 'Learn redux 🙏',
-    status: 'active',
-    color: 'black',
-  },
-  {
-    id: Date.now() * 3,
-    contents: 'Build Something fun 🚀',
-    status: 'active',
-    color: 'black',
-  },
-]
 
 function List() {
+  const todoList = useRecoilValue(todoListAtom)
+
   return (
     <Container>
       <Input />
       <TodosContainer>
-        {TODOS.map((todo) => (
+        {todoList.map((todo) => (
           <Todo key={todo.id} {...todo} />
         ))}
       </TodosContainer>
