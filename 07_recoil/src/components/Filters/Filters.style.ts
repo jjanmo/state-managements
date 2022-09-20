@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
+  padding: 2rem 1rem;
   margin: 1rem auto 0;
   border-radius: 10px;
 
@@ -21,5 +22,77 @@ export const FilterTitle = styled.div`
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
-  padding: 0.5em 0;
+  padding: 1rem 0;
+`
+
+export const PriorityContainer = styled.div`
+  padding: 0 2rem;
+`
+
+export const Button = styled.button<{ active: boolean }>`
+  width: 70%;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid #0984e3;
+  background-color: ${({ active }) => (active ? '#0984e3' : 'white')};
+  color: ${({ active }) => (active ? 'white' : '#0984e3')};
+  font-size: 16px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s ease-in-out;
+
+  & + & {
+    margin-top: 10px;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+`
+
+export const LeftText = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  font-size: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #b2bec3;
+
+  & em {
+    font-weight: bold;
+    font-size: 20px;
+    color: #2d3436;
+  }
+`
+
+export const PriorityLabel = styled.label<{ color: string }>`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  & div {
+    width: 100%;
+    padding: 8px 0 8px 8px;
+    border-radius: 5px;
+
+    color: white;
+    background-color: ${({ color }) => color};
+
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  input {
+    transform: translateY(-1px);
+  }
+
+  & + & {
+    margin-top: 10px;
+  }
 `
