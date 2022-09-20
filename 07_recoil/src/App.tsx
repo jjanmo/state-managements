@@ -1,3 +1,4 @@
+import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
 import Filters from './components/Filters'
 import Header from './components/Header'
@@ -5,11 +6,13 @@ import List from './components/List'
 
 function App() {
   return (
-    <Container>
-      <Header />
-      <List />
-      <Filters />
-    </Container>
+    <RecoilRoot>
+      <Container>
+        <Header />
+        <List />
+        <Filters />
+      </Container>
+    </RecoilRoot>
   )
 }
 
