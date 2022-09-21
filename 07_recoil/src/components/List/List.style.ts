@@ -45,8 +45,8 @@ export const TodoContents = styled.label`
     content: '';
     top: 50%;
     left: 0;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
     border: 1px solid #bdc3c7;
     border-radius: 50%;
     transform: translateY(-50%);
@@ -54,20 +54,19 @@ export const TodoContents = styled.label`
   &::after {
     position: absolute;
     content: '';
-    top: 9px;
-    left: 6px;
+    top: 0.85rem;
+    left: 0.7rem;
 
-    width: 12px;
-    height: 6px;
-    border: 3px solid white;
+    width: 14px;
+    height: 10px;
+    border: 4px solid white;
     border-top: none;
     border-right: none;
 
     opacity: 0;
-    transform: translateY(-50%) rotate(-45deg);
+    transform: translate(-0.3rem, -0.6rem) rotate(-45deg);
   }
 `
-
 export const TodoCheckbox = styled.input`
   display: none;
 
@@ -80,5 +79,23 @@ export const TodoCheckbox = styled.input`
   }
   &:checked + ${TodoContents} {
     text-decoration: line-through #e74c3c 2px;
+  }
+`
+export const TodoPriority = styled.select``
+
+export const TodoDeleteButton = styled.button`
+  width: 100%;
+  border: 1px solid #2d3436;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 18px;
+
+  color: white;
+  background-color: #2d3436;
+  transition: all 0.2s ease-in-out;
+
+  &:active {
+    transform: scale(1.1);
   }
 `
