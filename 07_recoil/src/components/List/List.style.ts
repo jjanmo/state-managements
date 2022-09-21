@@ -45,42 +45,42 @@ export const TodoContents = styled.label<{ color: string }>`
   &::before {
     position: absolute;
     content: '';
-    top: 50%;
+    top: 0;
     left: 0;
-    width: 1.6rem;
-    height: 1.6rem;
-    border: 1px solid #bdc3c7;
-    border-radius: 50%;
-    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    background-color: #dfe6e9;
   }
+  &:hover::before {
+    background-color: #b2bec3;
+  }
+
   &::after {
     position: absolute;
     content: '';
-    top: 0.85rem;
-    left: 0.7rem;
-
-    width: 14px;
-    height: 10px;
-    border: 4px solid white;
-    border-top: none;
-    border-right: none;
+    left: 8px;
+    top: 1px;
+    width: 10px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
 
     opacity: 0;
-    transform: translate(-0.3rem, -0.6rem) rotate(-45deg);
+    transform: rotate(45deg);
   }
 `
 export const TodoCheckbox = styled.input`
   display: none;
 
   &:checked + ${TodoContents}::before {
-    background-color: #e74c3c;
-    border-color: #e74c3c;
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
   }
   &:checked + ${TodoContents}::after {
     opacity: 1;
   }
   &:checked + ${TodoContents} {
-    text-decoration: line-through #e74c3c 2px;
+    text-decoration: line-through #6c5ce7 3px;
   }
 `
 export const TodoDeleteButton = styled.button`
