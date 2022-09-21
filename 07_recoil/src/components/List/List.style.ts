@@ -85,17 +85,17 @@ export const TodoCheckbox = styled.input`
 `
 export const TodoDeleteButton = styled.button`
   width: 100%;
-  border: 1px solid #2d3436;
+  border: 1px solid #636e72;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
   font-size: 18px;
 
-  color: white;
-  background-color: #2d3436;
-  transition: all 0.2s ease-in-out;
+  color: #636e72;
+  background-color: #dfe6e9;
+  transition: background-color 0.3s ease-in-out;
 
-  &:active {
-    transform: scale(1.1);
+  &:hover {
+    background-color: #b2bec3;
   }
 `

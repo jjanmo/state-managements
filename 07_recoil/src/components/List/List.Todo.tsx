@@ -27,7 +27,12 @@ function Todo({ id, contents, status, priority }: ITodo) {
 
   return (
     <S.Container>
-      <S.TodoCheckbox type="checkbox" name={id + contents} id={id + contents} />
+      <S.TodoCheckbox
+        type="checkbox"
+        name={id + contents}
+        id={id + contents}
+        checked={status === 'completed'}
+      />
       <S.TodoContents htmlFor={id + contents} color={PRIORITY_COLOR[priority]}>
         {contents}
       </S.TodoContents>
