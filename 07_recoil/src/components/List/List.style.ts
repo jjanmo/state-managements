@@ -29,7 +29,7 @@ export const Form = styled.form`
   }
 `
 
-export const TodoContents = styled.label`
+export const TodoContents = styled.label<{ color: string }>`
   position: relative;
   width: 100%;
   padding-left: 2.5rem;
@@ -39,6 +39,8 @@ export const TodoContents = styled.label`
   font-size: 1.5rem;
   user-select: none;
   cursor: pointer;
+
+  color: ${({ color }) => color};
 
   &::before {
     position: absolute;
@@ -81,8 +83,6 @@ export const TodoCheckbox = styled.input`
     text-decoration: line-through #e74c3c 2px;
   }
 `
-export const TodoPriority = styled.select``
-
 export const TodoDeleteButton = styled.button`
   width: 100%;
   border: 1px solid #2d3436;

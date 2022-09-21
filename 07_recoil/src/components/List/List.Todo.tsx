@@ -2,6 +2,9 @@ import * as S from './List.style'
 import { ITodo } from '../../recoil/todo/types'
 import { useSetRecoilState } from 'recoil'
 import { todoListAtom } from '../../recoil/todo/atom'
+import { Priority } from '../../recoil/todo/types'
+import React from 'react'
+import { PRIORITY_COLOR } from '../../constants'
 
 function Todo({ id, contents, status, priority }: ITodo) {
   const setTodoList = useSetRecoilState(todoListAtom)
@@ -14,16 +17,26 @@ function Todo({ id, contents, status, priority }: ITodo) {
     }
   }
 
+  const handleChangeSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as Priority
+
+    setTodoList((todoList) =>
+      todoList.map((todo) => (todo.id === id ? { ...todo, priority: value } : todo))
+    )
+  }
+
   return (
     <S.Container>
       <S.TodoCheckbox type="checkbox" name={id + contents} id={id + contents} />
-      <S.TodoContents htmlFor={id + contents}>{contents}</S.TodoContents>
+      <S.TodoContents htmlFor={id + contents} color={PRIORITY_COLOR[priority]}>
+        {contents}
+      </S.TodoContents>
 
-      <select name="priority">
-        <option selected>Black</option>
-        <option>High</option>
-        <option>Middle</option>
-        <option>Low</option>
+      <select name="priority" onChange={handleChangeSelector} defaultValue="normal">
+        <option value="normal">Normal</option>
+        <option value="high">High</option>
+        <option value="middle">Middle</option>
+        <option value="low">Low</option>
       </select>
 
       <S.TodoDeleteButton onClick={handleClickDeleteButton}>X</S.TodoDeleteButton>
