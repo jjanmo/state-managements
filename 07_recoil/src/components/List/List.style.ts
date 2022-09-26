@@ -36,7 +36,7 @@ export const TodoContents = styled.label<{ color: string }>`
   display: flex;
   align-items: center;
 
-  font-size: 1.5rem;
+  font-size: 2rem;
   user-select: none;
   cursor: pointer;
 

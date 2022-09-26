@@ -1,12 +1,12 @@
 import * as S from './List.style'
-import { ITodo } from '../../recoil/todo/types'
+import { Status, Todo as TodoType } from '../../recoil/todo/types'
 import { useSetRecoilState } from 'recoil'
 import { todoListAtom } from '../../recoil/todo/atom'
 import { Priority } from '../../recoil/todo/types'
 import React from 'react'
 import { PRIORITY_COLOR } from '../../constants'
 
-function Todo({ id, contents, status, priority }: ITodo) {
+function Todo({ id, contents, status, priority }: TodoType) {
   const setTodoList = useSetRecoilState(todoListAtom)
 
   const handleClickDeleteButton = () => {
@@ -25,13 +25,25 @@ function Todo({ id, contents, status, priority }: ITodo) {
     )
   }
 
+  const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const id = Number(e.target.dataset.id)
+
+    const changeStatus = (status: Status) => (status === 'active' ? 'completed' : 'active')
+    setTodoList((todoList) =>
+      todoList.map<TodoType>((todo) =>
+        todo.id === id ? { ...todo, status: changeStatus(todo.status) } : todo
+      )
+    )
+  }
+
   return (
     <S.Container>
       <S.TodoCheckbox
         type="checkbox"
         name={id + contents}
         id={id + contents}
-        checked={status === 'completed'}
+        data-id={id}
+        onChange={handleChangeCheckbox}
       />
       <S.TodoContents htmlFor={id + contents} color={PRIORITY_COLOR[priority]}>
         {contents}
