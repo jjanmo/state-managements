@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
-import { ITodo } from './types'
+import { Todo } from './types'
 
-export const todoListAtom = atom<ITodo[]>({
+export const todoListAtom = atom<Todo[]>({
   key: 'todoList',
   default: [],
 })
