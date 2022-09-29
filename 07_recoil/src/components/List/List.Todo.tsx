@@ -44,6 +44,7 @@ function Todo({ id, contents, status, priority }: TodoType) {
         id={id + contents}
         data-id={id}
         onChange={handleChangeCheckbox}
+        checked={status === 'completed'}
       />
       <S.TodoContents htmlFor={id + contents} color={PRIORITY_COLOR[priority]}>
         {contents}

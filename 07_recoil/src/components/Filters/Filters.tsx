@@ -1,19 +1,37 @@
 import * as S from './Filters.style'
 import PriorityCheckbox from './Filters.priority'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { todoListAtom } from '../../recoil/todo/atom'
+import React from 'react'
+import { Todo } from '../../recoil/todo/types'
 
 const priority = ['high', 'middle', 'low']
 
+type ActionType = 'complete' | 'clear'
+
 function Filter() {
-  const todoList = useRecoilValue(todoListAtom)
+  const [todoList, setTodoList] = useRecoilState<Todo[]>(todoListAtom)
+
+  const handleClickActionButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const type = (e.target as HTMLDivElement).dataset.type as ActionType
+
+    if (type === 'clear') {
+      setTodoList((todoList) => todoList.filter((todo) => todo.status !== 'completed'))
+    } else {
+      setTodoList((todoList) => todoList.map((todo) => ({ ...todo, status: 'completed' })))
+    }
+  }
 
   return (
     <S.Container>
       <S.Column>
         <S.FilterTitle>Actions</S.FilterTitle>
-        <S.Button active={false}>Mark All Completed</S.Button>
-        <S.Button active={false}>Clear Completed</S.Button>
+        <S.Button data-type="complete" onClick={handleClickActionButton}>
+          Mark All Completed
+        </S.Button>
+        <S.Button data-type="clear" onClick={handleClickActionButton}>
+          Clear Completed
+        </S.Button>
       </S.Column>
       <S.Column>
         <S.FilterTitle>Remaining Todos</S.FilterTitle>

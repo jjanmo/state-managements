@@ -29,7 +29,7 @@ export const PriorityContainer = styled.div`
   padding: 0 2rem;
 `
 
-export const Button = styled.button<{ active: boolean }>`
+export const Button = styled.button<{ active?: boolean }>`
   width: 70%;
   padding: 10px;
   margin: 0 auto;
