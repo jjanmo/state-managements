@@ -1,11 +1,9 @@
 import * as S from './Filters.style'
-import PriorityCheckbox from './Filters.priority'
+import Priority from './Filters.Priority'
 import { useRecoilState } from 'recoil'
 import { todoListAtom } from '../../recoil/todo/atom'
 import React from 'react'
 import { Todo } from '../../recoil/todo/types'
-
-const priority = ['high', 'middle', 'low']
 
 type ActionType = 'complete' | 'clear'
 
@@ -33,24 +31,25 @@ function Filter() {
           Clear Completed
         </S.Button>
       </S.Column>
+
       <S.Column>
         <S.FilterTitle>Remaining Todos</S.FilterTitle>
         <S.LeftText>
           <em>{todoList.filter((todo) => todo.status === 'active').length}</em> item left
         </S.LeftText>
       </S.Column>
+
       <S.Column>
         <S.FilterTitle>Filter by Status</S.FilterTitle>
         <S.Button active={false}>All</S.Button>
         <S.Button active={false}>Active</S.Button>
         <S.Button active={false}>Completed</S.Button>
       </S.Column>
+
       <S.Column>
         <S.FilterTitle>Filter by Priority</S.FilterTitle>
         <S.PriorityContainer>
-          {priority.map((p, i) => (
-            <PriorityCheckbox key={i} priority={p} />
-          ))}
+          <Priority />
         </S.PriorityContainer>
       </S.Column>
     </S.Container>
