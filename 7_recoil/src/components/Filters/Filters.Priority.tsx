@@ -3,17 +3,20 @@ import { PRIORITY_COLOR } from '../../constants'
 
 const priority = ['high', 'middle', 'low']
 
-function Priority() {
+function PrioritySelector() {
   return (
     <>
-      {priority.map((p, i) => (
-        <S.PriorityLabel key={i} htmlFor={p} color={PRIORITY_COLOR[p]}>
-          <input type="checkbox" name={p} id={p} />
-          <div>{p.toUpperCase()}</div>
-        </S.PriorityLabel>
-      ))}
+      <S.FilterTitle>Filter by Priority</S.FilterTitle>
+      <S.PriorityContainer>
+        {priority.map((p, i) => (
+          <S.PriorityLabel key={i} htmlFor={p} color={PRIORITY_COLOR[p]}>
+            <input type="checkbox" name={p} id={p} />
+            <div>{p.toUpperCase()}</div>
+          </S.PriorityLabel>
+        ))}
+      </S.PriorityContainer>
     </>
   )
 }
 
-export default Priority
+export default PrioritySelector

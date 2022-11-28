@@ -1,35 +1,17 @@
 import * as S from './Filters.style'
-import Priority from './Filters.Priority'
-import { useRecoilState } from 'recoil'
+import PrioritySelector from './Filters.Priority'
+import { useRecoilValue } from 'recoil'
 import { todoListAtom } from '../../recoil/todo/atom'
-import React from 'react'
-import { Todo } from '../../recoil/todo/types'
-
-type ActionType = 'complete' | 'clear'
+import ActionsSelector from './Filters.Actions'
+import StatusSelector from './Filters.Status'
 
 function Filter() {
-  const [todoList, setTodoList] = useRecoilState<Todo[]>(todoListAtom)
-
-  const handleClickActionButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const type = (e.target as HTMLDivElement).dataset.type as ActionType
-
-    if (type === 'clear') {
-      setTodoList((todoList) => todoList.filter((todo) => todo.status !== 'completed'))
-    } else {
-      setTodoList((todoList) => todoList.map((todo) => ({ ...todo, status: 'completed' })))
-    }
-  }
+  const todoList = useRecoilValue(todoListAtom)
 
   return (
     <S.Container>
       <S.Column>
-        <S.FilterTitle>Actions</S.FilterTitle>
-        <S.Button data-type="complete" onClick={handleClickActionButton}>
-          Mark All Completed
-        </S.Button>
-        <S.Button data-type="clear" onClick={handleClickActionButton}>
-          Clear Completed
-        </S.Button>
+        <ActionsSelector />
       </S.Column>
 
       <S.Column>
@@ -40,17 +22,11 @@ function Filter() {
       </S.Column>
 
       <S.Column>
-        <S.FilterTitle>Filter by Status</S.FilterTitle>
-        <S.Button active={false}>All</S.Button>
-        <S.Button active={false}>Active</S.Button>
-        <S.Button active={false}>Completed</S.Button>
+        <StatusSelector />
       </S.Column>
 
       <S.Column>
-        <S.FilterTitle>Filter by Priority</S.FilterTitle>
-        <S.PriorityContainer>
-          <Priority />
-        </S.PriorityContainer>
+        <PrioritySelector />
       </S.Column>
     </S.Container>
   )
