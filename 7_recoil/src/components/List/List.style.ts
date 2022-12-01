@@ -14,19 +14,62 @@ export const Container = styled.div`
 `
 export const Form = styled.form`
   width: 100%;
+`
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 5rem;
+  margin: 1rem auto;
+`
+export const Input = styled.input`
+  width: 60%;
+  padding-left: 1em;
 
-  & input {
-    width: 100%;
-    padding: 1em 1em 1em 50px;
+  font-size: 1.4rem;
+  border: 0;
+  border-radius: 10px;
+  outline: none;
 
-    font-size: 1.4rem;
-    border: 0;
-    outline: none;
-
-    &::placeholder {
-      color: #b2bec3;
-    }
+  &::placeholder {
+    color: #b2bec3;
   }
+`
+export const RadioButtons = styled.div`
+  width: 32%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+
+  border-radius: 10px;
+  background-color: white;
+`
+export const Guide = styled.div`
+  grid-column: 1 / 4;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+
+  padding-top: 5px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #b2bec3;
+`
+export const PriorityLabel = styled.label`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+`
+export const RadioButton = styled.input`
+  display: none;
 `
 
 export const TodoContents = styled.label<{ color: string }>`
