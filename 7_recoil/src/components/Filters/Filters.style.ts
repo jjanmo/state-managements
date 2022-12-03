@@ -70,11 +70,13 @@ export const LeftText = styled.div`
   }
 `
 
-export const PriorityLabel = styled.label<{ color: string }>`
+export const PriorityLabel = styled.label<{ color: string; isActive: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
 
   & div {
     width: 100%;
@@ -89,6 +91,7 @@ export const PriorityLabel = styled.label<{ color: string }>`
   }
 
   input {
+    display: none;
     transform: translateY(-1px);
   }
 
