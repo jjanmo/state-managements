@@ -55,7 +55,7 @@ function Input() {
         />
 
         <S.RadioButtons>
-          <S.Guide>Select your priority 🚀</S.Guide>
+          <S.Guide>Select todo's priority 🚀</S.Guide>
           <S.PriorityLabel htmlFor="high" isActive={watch('priority') === 'high'}>
             <S.RadioButton type="radio" id="high" value="high" {...register('priority')} />
             High

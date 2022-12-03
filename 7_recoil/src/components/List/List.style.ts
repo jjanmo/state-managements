@@ -7,10 +7,6 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 6rem 3rem;
   grid-column-gap: 10px;
-
-  & + & {
-    margin-top: 1rem;
-  }
 `
 export const Form = styled.form`
   width: 100%;
@@ -54,7 +50,7 @@ export const Guide = styled.div`
 
   padding-top: 5px;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   color: #b2bec3;
 `
 export const PriorityLabel = styled.label<{ isActive: boolean }>`

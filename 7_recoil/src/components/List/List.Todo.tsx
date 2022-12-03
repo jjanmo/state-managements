@@ -50,8 +50,7 @@ function Todo({ id, value, status, priority }: TodoType) {
         {value}
       </S.TodoContents>
 
-      <select name="priority" onChange={handleChangeSelector} defaultValue="normal">
-        <option value="normal">Normal</option>
+      <select name="priority" onChange={handleChangeSelector} defaultValue={priority}>
         <option value="high">High</option>
         <option value="middle">Middle</option>
         <option value="low">Low</option>
