@@ -1,5 +1,5 @@
 export type Status = 'active' | 'completed'
-export type Priority = 'high' | 'middle' | 'low' | 'normal'
+export type Priority = 'high' | 'middle' | 'low'
 
 export type FilterType =
   | 'action/complete'
@@ -13,7 +13,7 @@ export type FilterType =
 
 export interface Todo {
   id: number
-  contents: string
+  value: string
   status: Status
   priority: Priority
 }

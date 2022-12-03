@@ -6,7 +6,7 @@ import { Priority } from '../../recoil/todo/types'
 import React from 'react'
 import { PRIORITY_COLOR } from '../../constants'
 
-function Todo({ id, contents, status, priority }: TodoType) {
+function Todo({ id, value, status, priority }: TodoType) {
   const setTodoList = useSetRecoilState(todoListAtom)
 
   const handleClickDeleteButton = () => {
@@ -40,14 +40,14 @@ function Todo({ id, contents, status, priority }: TodoType) {
     <S.Container>
       <S.TodoCheckbox
         type="checkbox"
-        name={id + contents}
-        id={id + contents}
+        name={id + value}
+        id={id + value}
         data-id={id}
         onChange={handleChangeCheckbox}
         checked={status === 'completed'}
       />
-      <S.TodoContents htmlFor={id + contents} color={PRIORITY_COLOR[priority]}>
-        {contents}
+      <S.TodoContents htmlFor={id + value} color={PRIORITY_COLOR[priority]}>
+        {value}
       </S.TodoContents>
 
       <select name="priority" onChange={handleChangeSelector} defaultValue="normal">
