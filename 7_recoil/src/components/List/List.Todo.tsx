@@ -1,8 +1,8 @@
 import * as S from './List.style'
-import { Status, Todo as TodoType } from '../../recoil/todo/types'
+import { Status, Todo as TodoType } from '../../recoil/types'
 import { useSetRecoilState } from 'recoil'
-import { todoListAtom } from '../../recoil/todo/atom'
-import { Priority } from '../../recoil/todo/types'
+import { todoListAtom } from '../../recoil/atom'
+import { Priority } from '../../recoil/types'
 import React from 'react'
 import { PRIORITY_COLOR } from '../../constants'
 

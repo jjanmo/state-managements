@@ -1,7 +1,7 @@
 import * as S from './Filters.style'
 import PrioritySelector from './Filters.Priority'
 import { useRecoilValue } from 'recoil'
-import { todoListAtom } from '../../recoil/todo/atom'
+import { todoListAtom } from '../../recoil/atom'
 import ActionsSelector from './Filters.Actions'
 import StatusSelector from './Filters.Status'
 

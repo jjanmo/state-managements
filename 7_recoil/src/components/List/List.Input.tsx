@@ -1,8 +1,8 @@
 import { useSetRecoilState } from 'recoil'
 import * as S from './List.style'
-import { todoListAtom } from '../../recoil/todo/atom'
+import { todoListAtom } from '../../recoil/atom'
 import { useForm } from 'react-hook-form'
-import { Priority } from '@recoil/todo/types'
+import { Priority } from '@recoil/types'
 
 interface FormData {
   value: string

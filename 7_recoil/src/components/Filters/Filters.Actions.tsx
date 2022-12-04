@@ -1,6 +1,6 @@
 import { useSetRecoilState } from 'recoil'
-import { todoListAtom } from '../../recoil/todo/atom'
-import { Todo } from '../../recoil/todo/types'
+import { todoListAtom } from '../../recoil/atom'
+import { Todo } from '../../recoil/types'
 import * as S from './Filters.style'
 
 type ActionType = 'complete' | 'clear'

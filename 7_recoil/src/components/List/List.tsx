@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import { todoListAtom } from '../../recoil/todo/atom'
+import { todoListAtom } from '../../recoil/atom'
 import Input from './List.Input'
 import Todo from './List.Todo'
 
