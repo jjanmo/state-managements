@@ -1,17 +1,17 @@
+import { filteredTodoList } from '@recoil/selector'
 import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
-import { todoListAtom } from '../../recoil/atom'
 import Input from './List.Input'
 import Todo from './List.Todo'
 
 function List() {
-  const todoList = useRecoilValue(todoListAtom)
+  const filtered = useRecoilValue(filteredTodoList)
 
   return (
     <Container>
       <Input />
       <TodosContainer>
-        {todoList.map((todo) => (
+        {filtered.map((todo) => (
           <Todo key={todo.id} {...todo} />
         ))}
       </TodosContainer>
