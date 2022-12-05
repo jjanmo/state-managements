@@ -1,21 +1,26 @@
 import * as S from './Filters.style'
 import { PRIORITY_COLOR } from '../../constants'
-import { Priority } from '@recoil/todo/types'
+import { Priority } from '@recoil/types'
 import { useCallback, useState } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { filteringKeyAtom } from '@recoil/atom'
 
 const priority: Priority[] = ['high', 'middle', 'low']
 
 function PrioritySelector() {
   const [selected, setSelected] = useState<Priority | null>(null)
+  const setFilteringKey = useSetRecoilState(filteringKeyAtom)
 
   const handleClick = useCallback(
     (priority: Priority) => () => {
       if (selected && selected === priority) {
         setSelected(null)
+        setFilteringKey(`status/all`)
         return
       }
 
       setSelected(priority)
+      setFilteringKey(`priority/${priority}`)
     },
     [selected]
   )

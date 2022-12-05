@@ -1,9 +1,7 @@
 export type Status = 'active' | 'completed'
 export type Priority = 'high' | 'middle' | 'low'
 
-export type FilterType =
-  | 'action/complete'
-  | 'action/clear'
+export type FilteringKeyType =
   | 'status/all'
   | 'status/active'
   | 'status/completed'
