@@ -1,28 +1,34 @@
 import * as S from './Filters.style'
 import { PRIORITY_COLOR } from '../../constants'
 import { Priority } from '@recoil/types'
-import { useCallback, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useCallback, useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
 import { filteringKeyAtom } from '@recoil/atom'
 
 const priority: Priority[] = ['high', 'middle', 'low']
 
 function PrioritySelector() {
-  const [selected, setSelected] = useState<Priority | null>(null)
-  const setFilteringKey = useSetRecoilState(filteringKeyAtom)
+  const [filteringKey, setFilteringKey] = useRecoilState(filteringKeyAtom)
+  const [priorityKey, setPriorityKey] = useState<Priority | null>(null)
+
+  useEffect(() => {
+    const [pre, post] = filteringKey.split('/')
+
+    if (pre === 'priority') {
+      setPriorityKey(post as Priority)
+    }
+  }, [])
 
   const handleClick = useCallback(
     (priority: Priority) => () => {
-      if (selected && selected === priority) {
-        setSelected(null)
+      if (filteringKey && priorityKey === priority) {
         setFilteringKey(`status/all`)
         return
       }
 
-      setSelected(priority)
       setFilteringKey(`priority/${priority}`)
     },
-    [selected]
+    [setFilteringKey, filteringKey, priorityKey]
   )
 
   return (
@@ -34,7 +40,7 @@ function PrioritySelector() {
             key={i}
             htmlFor={`filter-${p}`}
             color={PRIORITY_COLOR[p]}
-            isActive={selected === p}
+            isActive={priorityKey === p}
           >
             <input type="checkbox" name="priority" id={`filter-${p}`} onClick={handleClick(p)} />
             <div>{p.toUpperCase()}</div>
