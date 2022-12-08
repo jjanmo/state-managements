@@ -3,44 +3,47 @@ import { PRIORITY_COLOR } from '../../constants'
 import { Priority } from '@recoil/types'
 import { useCallback, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { filteringKeyAtom } from '@recoil/atom'
+import { filteringAtom } from '@recoil/atom'
 
-const priority: Priority[] = ['high', 'middle', 'low']
+const priorityArr: Priority[] = ['high', 'middle', 'low']
 
 function PrioritySelector() {
-  const [filteringKey, setFilteringKey] = useRecoilState(filteringKeyAtom)
-  const [priorityKey, setPriorityKey] = useState<Priority | null>(null)
+  const [filteringKey, setFilteringKey] = useRecoilState(filteringAtom)
+  const [priority, setPriority] = useState<Priority | null>()
+
+  const [filterKey, condition] = filteringKey?.split('/') || []
 
   useEffect(() => {
-    const [pre, post] = filteringKey.split('/')
-
-    if (pre === 'priority') {
-      setPriorityKey(post as Priority)
+    if (filterKey === 'priority') {
+      setPriority(priority as Priority)
+    } else {
+      setPriority(null)
     }
-  }, [])
+  }, [priority, filterKey])
 
   const handleClick = useCallback(
     (priority: Priority) => () => {
-      if (filteringKey && priorityKey === priority) {
-        setFilteringKey(`status/all`)
+      if (filteringKey && condition === priority) {
+        setFilteringKey(null)
         return
       }
 
+      setPriority(priority)
       setFilteringKey(`priority/${priority}`)
     },
-    [setFilteringKey, filteringKey, priorityKey]
+    [setFilteringKey, filteringKey, condition]
   )
 
   return (
     <>
       <S.FilterTitle>Filter by Priority</S.FilterTitle>
       <S.PriorityContainer>
-        {priority.map((p, i) => (
+        {priorityArr.map((p, i) => (
           <S.PriorityLabel
             key={i}
             htmlFor={`filter-${p}`}
             color={PRIORITY_COLOR[p]}
-            isActive={priorityKey === p}
+            isActive={priority === p}
           >
             <input type="checkbox" name="priority" id={`filter-${p}`} onClick={handleClick(p)} />
             <div>{p.toUpperCase()}</div>

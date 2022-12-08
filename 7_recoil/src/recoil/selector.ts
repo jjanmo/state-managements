@@ -1,13 +1,13 @@
 import { selector } from 'recoil'
-import { filteringKeyAtom, todoListAtom } from './atom'
+import { filteringAtom, todoListAtom } from './atom'
 
 export const filteredTodoList = selector({
   key: 'filteredTodoList',
   get: ({ get }) => {
     const todoList = get(todoListAtom)
-    const filterKey = get(filteringKeyAtom)
+    const filteringKey = get(filteringAtom)
 
-    switch (filterKey) {
+    switch (filteringKey) {
       case 'priority/high': {
         return todoList.filter((todo) => todo['priority'] === 'high')
       }

@@ -45,6 +45,8 @@
 
 > 리덕스 툴킷을 이용한 `CRUD 앱`을 구현해보자.
 
+✅ app upgrade and 실제 crud api 만들어서 연결해보기
+
 > Preview
 
 ![preview](/screenshots/3_preview.gif)
@@ -75,6 +77,22 @@
 
 ## Redux Saga
 
+> [리덕스 사가](https://mskims.github.io/redux-saga-in-korean/)에 대해서 알아보자
+
+정리
+
+- generator란
+  - https://www.zerocho.com/category/ECMAScript/post/579b34e3062e76a002648af5
+  - https://kyounghwan01.github.io/blog/TS/React/redux-saga-ts/
+    #package-json-%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8E%E1%85%B5
+- saga에서 genrator라는 개념을 어떻게 사용하는지
+- redux saga pattern
+
+  - https://ssangq.netlify.app/posts/redux-saga
+  - https://meetup.toast.com/posts/136
+
+- [pokemon api](https://pokeapi.co/)
+
 ## MobX
 
 > 간단한 카운터를 바닐라 자바스크립트와 MobX 조합으로 만들면서 MobX를 알아보자.
@@ -83,9 +101,34 @@ Redux 다음으로 알려진 상태관리 라이브러리는 `MobX`이다. (두�
 
 ## MobX React
 
-> 리액트에서 MobX를 이용한 간단한 TodoApp을 통해서 리액트에서 MobX의 사용방법에 대해서 알아보자.
+> 리액트에서 MobX를 이용한 간단한 TodoApp을 통해서 리액트에서 MobX의 사용방법에 대해서 알아보자. with [나무소리](https://www.youtube.com/playlist?list=PLOSNUO27qFbtYC5oRwJVsNavcPEI5uoiJ)
 
 ## Recoil
+
+> `리액트` 전용 상태관리 라이브러리
+
+> Recoil을 사용하여 간단한 `TodoApp` 을 만들어보기 with [Recoil Official Site](https://recoiljs.org/ko/)
+
+<details>
+  <summary>Features</summary>
+  
+- [x] todo 아이템 추가
+- [ ] todo 아이템 수정
+- [x] todo 아이템 삭제
+- [ ] todo 아이템 필터링
+- 유용한 통계 표시 구현
+  - [ ] 전체 todo 리스트에서 목록의 총 항목 수
+  - [ ] 완료된 항목 수
+  - [ ] 완료된 항목의 백분율 같은 리스트의 유용한 속성들
+  </details>
+
+## xstate
+
+## zustand
+
+## jotai
+
+## react-tracked
 
 # Ref
 

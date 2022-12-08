@@ -1,12 +1,12 @@
 import { atom } from 'recoil'
-import { FilteringKeyType, Todo } from './types'
+import { FilteringType, Todo } from './types'
 
 export const todoListAtom = atom<Todo[]>({
   key: 'todoList',
   default: [],
 })
 
-export const filteringKeyAtom = atom<FilteringKeyType>({
+export const filteringAtom = atom<FilteringType | null>({
   key: 'filteringKey',
-  default: 'status/all',
+  default: null,
 })
