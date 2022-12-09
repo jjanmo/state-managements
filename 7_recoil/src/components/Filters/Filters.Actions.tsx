@@ -3,7 +3,7 @@ import { todoListAtom } from '../../recoil/atom'
 import { Todo } from '../../recoil/types'
 import * as S from './Filters.style'
 
-type ActionType = 'complete' | 'clear'
+type ActionType = 'complete' | 'clear' | 'active'
 
 function ActionsSelector() {
   const setTodoList = useSetRecoilState<Todo[]>(todoListAtom)
@@ -13,8 +13,10 @@ function ActionsSelector() {
 
     if (type === 'clear') {
       setTodoList((todoList) => todoList.filter((todo) => todo.status !== 'completed'))
-    } else {
+    } else if (type === 'complete') {
       setTodoList((todoList) => todoList.map((todo) => ({ ...todo, status: 'completed' })))
+    } else {
+      setTodoList((todoList) => todoList.map((todo) => ({ ...todo, status: 'active' })))
     }
   }
 
@@ -23,6 +25,9 @@ function ActionsSelector() {
       <S.FilterTitle>Actions</S.FilterTitle>
       <S.Button data-type="complete" onClick={handleClickActionButton}>
         Mark All Completed
+      </S.Button>
+      <S.Button data-type="active" onClick={handleClickActionButton}>
+        Mark All Active
       </S.Button>
       <S.Button data-type="clear" onClick={handleClickActionButton}>
         Clear Completed

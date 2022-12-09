@@ -5,13 +5,13 @@ import Input from './List.Input'
 import Todo from './List.Todo'
 
 function List() {
-  const filtered = useRecoilValue(filteredTodoList)
+  const todolist = useRecoilValue(filteredTodoList)
 
   return (
     <Container>
       <Input />
       <TodosContainer>
-        {filtered.map((todo) => (
+        {todolist.map((todo) => (
           <Todo key={todo.id} {...todo} />
         ))}
       </TodosContainer>
