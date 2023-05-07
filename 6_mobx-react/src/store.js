@@ -11,7 +11,11 @@ import { action, computed, makeObservable, observable } from 'mobx';
  */
 
 export class TodosStore {
-  todos = [];
+  todos = [
+    { id: 1, content: 'Study JS', date: '2023-05-07', isDone: false },
+    { id: 2, content: 'Study React', date: '2023-05-07', isDone: false },
+    { id: 3, content: 'Study Typescript', date: '2023-05-07', isDone: false },
+  ];
 
   constructor() {
     makeObservable(this, {
@@ -19,7 +23,7 @@ export class TodosStore {
       addTodo: action,
       deleteTodo: action,
       editTodo: action,
-      updateTodoStaus: action,
+      updateTodoStatus: action,
       totalTodos: computed,
       completedTodos: computed,
     });
@@ -39,17 +43,17 @@ export class TodosStore {
   };
 
   deleteTodo = (id) => {
-    return this.todos.filter((todo) => todo.id !== id);
+    this.todos = this.todos.filter((todo) => todo.id !== id);
   };
 
   editTodo = (id, updated) => {
-    return this.todos.map((todo) =>
+    this.todos = this.todos.map((todo) =>
       todo.id == id ? { ...todo, content: updated } : todo
     );
   };
 
-  updateTodoStaus = (id) => {
-    return this.todos.map((todo) =>
+  updateTodoStatus = (id) => {
+    this.todos = this.todos.map((todo) =>
       todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
     );
   };
