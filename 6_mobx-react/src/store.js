@@ -12,17 +12,20 @@ import { action, computed, makeObservable, observable } from 'mobx';
 
 export class TodosStore {
   todos = [
-    { id: 1, content: 'Study JS', date: '2023-05-07', isDone: false },
-    { id: 2, content: 'Study React', date: '2023-05-07', isDone: false },
-    { id: 3, content: 'Study Typescript', date: '2023-05-07', isDone: false },
+    // { id: 1, content: 'Study JS', date: '2023-05-07', isDone: false },
+    // { id: 2, content: 'Study React', date: '2023-05-07', isDone: false },
+    // { id: 3, content: 'Study Typescript', date: '2023-05-07', isDone: false },
   ];
+  editingData = null;
 
   constructor() {
     makeObservable(this, {
       todos: observable,
+      editingData: observable,
       addTodo: action,
       deleteTodo: action,
       editTodo: action,
+      selectEditing: action,
       updateTodoStatus: action,
       totalTodos: computed,
       completedTodos: computed,
@@ -48,7 +51,7 @@ export class TodosStore {
 
   editTodo = (id, updated) => {
     this.todos = this.todos.map((todo) =>
-      todo.id == id ? { ...todo, content: updated } : todo
+      todo.id == id ? { ...todo, ...updated } : todo
     );
   };
 
@@ -56,5 +59,9 @@ export class TodosStore {
     this.todos = this.todos.map((todo) =>
       todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
     );
+  };
+
+  selectEditing = (data) => {
+    this.editingData = data;
   };
 }

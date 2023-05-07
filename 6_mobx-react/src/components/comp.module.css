@@ -46,7 +46,7 @@ section {
   composes: button;
   background-color: #5352ed;
 }
-.editBtn {
+.selectBtn {
   composes: button;
   background-color: #2ed573;
 }
@@ -54,14 +54,14 @@ section {
   composes: button;
   background-color: #ff4757;
 }
-.updateBtn {
+.editBtn {
   composes: button;
   background-color: #22a6b3;
   width: 40%;
   padding: 10px 0;
   margin-top: 30px;
 }
-.updateBtn:hover {
+.editBtn:hover {
   transform: none;
 }
 ul {
