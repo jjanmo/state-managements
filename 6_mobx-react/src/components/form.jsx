@@ -24,6 +24,9 @@ const Form = () => {
       date: state.date,
       isDone: false,
     });
+
+    state.todo = '';
+    state.date = '';
   };
 
   return (
