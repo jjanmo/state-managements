@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import styles from './comp.module.css';
 
 const Form = () => {
@@ -18,4 +19,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default observer(Form);
