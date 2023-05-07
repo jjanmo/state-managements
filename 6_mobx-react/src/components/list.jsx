@@ -5,7 +5,7 @@ import styles from './comp.module.css';
 
 const List = () => {
   const { completedTodos, totalTodos, todos } = useTodosContext();
-  console.log(completedTodos, totalTodos);
+
   return (
     <div>
       <h1 className={styles.todosCount}>
