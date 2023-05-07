@@ -30,7 +30,7 @@ export class TodosStore {
   }
 
   get completedTodos() {
-    return this.todos.filter((todo) => this.todo.isDone).length;
+    return this.todos.filter((todo) => todo.isDone).length;
   }
 
   addTodo = (todo) => {
