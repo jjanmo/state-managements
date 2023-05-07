@@ -13,6 +13,10 @@ const Form = () => {
     handleChangeDate(e) {
       this.date = e.target.value;
     },
+    clearData() {
+      this.todo = '';
+      this.date = '';
+    },
   }));
 
   const handleClickAdd = () => {
@@ -25,8 +29,7 @@ const Form = () => {
       isDone: false,
     });
 
-    state.todo = '';
-    state.date = '';
+    state.clearData();
   };
 
   return (

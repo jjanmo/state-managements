@@ -18,9 +18,11 @@ const List = () => {
         </span>
       </h1>
       <ul>
-        {todos &&
-          todos.length > 0 &&
-          todos.map((todo) => <Todo key={todo.id} {...todo} />)}
+        {todos?.length > 0 ? (
+          todos.map((todo) => <Todo key={todo.id} {...todo} />)
+        ) : (
+          <div className={styles.placeholder}>Hello MobX</div>
+        )}
       </ul>
     </div>
   );
