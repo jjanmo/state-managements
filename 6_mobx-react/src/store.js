@@ -21,6 +21,7 @@ export class TodosStore {
       editTodo: action,
       updateTodoStaus: action,
       totalTodos: computed,
+      completedTodos: computed,
     });
   }
 
@@ -28,23 +29,28 @@ export class TodosStore {
     return this.todos.length;
   }
 
-  addTodo(todo) {
-    return [...this.todo, todo];
+  get completedTodos() {
+    return this.todos.filter((todo) => this.todo.isDone).length;
   }
 
-  deleteTodo(id) {
+  addTodo = (todo) => {
+    const newTodos = [...this.todos, todo];
+    this.todos = newTodos;
+  };
+
+  deleteTodo = (id) => {
     return this.todos.filter((todo) => todo.id !== id);
-  }
+  };
 
-  editTodo(id, updated) {
+  editTodo = (id, updated) => {
     return this.todos.map((todo) =>
       todo.id == id ? { ...todo, content: updated } : todo
     );
-  }
+  };
 
-  updateTodoStaus(id) {
+  updateTodoStaus = (id) => {
     return this.todos.map((todo) =>
       todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
     );
-  }
+  };
 }
