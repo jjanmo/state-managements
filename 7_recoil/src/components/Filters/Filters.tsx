@@ -1,12 +1,12 @@
 import * as S from './Filters.style'
 import PrioritySelector from './Filters.Priority'
 import { useRecoilValue } from 'recoil'
-import { todoListAtom } from '../../recoil/atom'
 import ActionsSelector from './Filters.Actions'
 import StatusSelector from './Filters.Status'
+import { todosStats } from '@recoil/selector'
 
 function Filter() {
-  const todoList = useRecoilValue(todoListAtom)
+  const stats = useRecoilValue(todosStats)
 
   return (
     <S.Container>
@@ -17,7 +17,13 @@ function Filter() {
       <S.Column>
         <S.FilterTitle>Remaining Todos</S.FilterTitle>
         <S.LeftText>
-          <em>{todoList.filter((todo) => todo.status === 'active').length}</em> item left
+          <em>{stats.active}</em> item left
+        </S.LeftText>
+        <S.FilterTitle>Completed Todos</S.FilterTitle>
+        <S.LeftText>
+          <em>{`${stats.completed}`}</em> item completed
+          <br />
+          <span className="percent">( {stats.completedPercent} )</span>
         </S.LeftText>
       </S.Column>
 

@@ -20,8 +20,8 @@ export const Column = styled.div`
 export const FilterTitle = styled.div`
   width: 100%;
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   padding: 1rem 0;
 `
 
@@ -58,15 +58,22 @@ export const Button = styled.button<{ active?: boolean }>`
 export const LeftText = styled.div`
   width: 70%;
   margin: 0 auto;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
   text-transform: uppercase;
   color: #b2bec3;
 
   & em {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     color: #2d3436;
+  }
+  & .percent {
+    display: inline-block;
+    color: #686de0;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 0.5rem;
   }
 `
 
