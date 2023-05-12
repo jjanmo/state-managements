@@ -24,12 +24,3 @@ class Info {
     this.count--;
   }
 }
-
-/*
-
-makeObservable
-observable
-action
-
-
-*/
