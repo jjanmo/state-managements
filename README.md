@@ -11,7 +11,7 @@
 
 </details>
 
-## Redux
+## Redux [done]
 
 > 리덕스의 전체적인 흐름을 다이어그램으로 알아보자 🚀
 
@@ -29,7 +29,7 @@
 
 - 상태 변화가 일어날 때마다 항상 위와 같은 데이터의 단방향 흐름을 통해서 컴퍼넌트의 변화가 나타난다.
 
-## React Redux
+## React Redux [done]
 
 리액트 리덕스가 무엇일까? 리덕스와 리액트 리덕스는 무엇이 다르길래 우리는 리덕스 뿐만 아니라 리액트 리덕스도 알아야할까?
 
@@ -41,15 +41,9 @@
 
 리덕스에서 미들웨어가 1)무엇이고 이것이 2)왜 필요한지 알아보자. 나아가 코드적으로 3)어떻게 동작하는지에 대해서 살펴보자.
 
-## Redux Toolkit
+## Redux Toolkit [done]
 
 > 리덕스 툴킷을 이용한 `CRUD 앱`을 구현해보자.
-
-✅ app upgrade and 실제 crud api 만들어서 연결해보기
-
-> Preview
-
-![preview](/screenshots/3_preview.gif)
 
 <details>
   <summary>Features</summary>
@@ -75,7 +69,7 @@
 
 </details>
 
-## Redux Saga
+## Redux Saga [-ing]
 
 > [리덕스 사가](https://mskims.github.io/redux-saga-in-korean/)에 대해서 알아보자
 
@@ -93,51 +87,69 @@
 
 - [pokemon api](https://pokeapi.co/)
 
-## MobX
+## MobX [-ing]
 
 > 간단한 카운터를 바닐라 자바스크립트와 MobX 조합으로 만들면서 MobX를 알아보자.
 
 Redux 다음으로 알려진 상태관리 라이브러리는 `MobX`이다. (두번째라고 해서 두번째로 좋다는 건 아니다. 개발환경에 따라서 맞는 기술을 사용하면 되는 것!!)
 
-## MobX React
+## MobX React [done]
 
-> 리액트에서 MobX를 이용한 간단한 TodoApp을 통해서 리액트에서 MobX의 사용방법에 대해서 알아보자. with [나무소리](https://www.youtube.com/playlist?list=PLOSNUO27qFbtYC5oRwJVsNavcPEI5uoiJ)
+> 리액트에서 MobX를 이용한 간단한 TodoApp을 통해서 리액트에서 MobX의 사용방법에 대해서 알아보자.
 
-## Recoil
-
-> `리액트` 전용 상태관리 라이브러리
-
-> Recoil을 사용하여 간단한 `TodoApp` 을 만들어보기 with [Recoil Official Site](https://recoiljs.org/ko/)
+> [Demo](https://devdemodd.github.io/mobx-todoapp/)
 
 <details>
   <summary>Features</summary>
   
 - [x] todo 아이템 추가
-- [ ] todo 아이템 수정
+- [x] todo 아이템 수정
 - [x] todo 아이템 삭제
 - [ ] todo 아이템 필터링
 - 유용한 통계 표시 구현
-  - [ ] 전체 todo 리스트에서 목록의 총 항목 수
-  - [ ] 완료된 항목 수
+  - [x] 전체 todo 리스트에서 목록의 총 항목 수
+  - [x] 완료된 항목 수
   - [ ] 완료된 항목의 백분율 같은 리스트의 유용한 속성들
-  </details>
+</details>
 
-## xstate
+## Recoil [done]
 
-## zustand
+> `리액트` 전용 상태관리 라이브러리
 
-## jotai
+> `Recoil`을 사용하여 간단한 **TodoApp** 을 만들어보기
 
-## react-tracked
+> [Demo](https://devdemodd.github.io/recoil-todoapp/)
 
-# Ref
+<details>
+  <summary>Features</summary>
+  
+- [x] todo 아이템 추가
+- [x] todo 아이템 수정
+- [x] todo 아이템 삭제
+- [x] todo 아이템 필터링
+- 유용한 통계 표시 구현
+  - [x] 전체 todo 리스트에서 목록의 총 항목 수
+  - [x] 완료된 항목 수
+  - [x] 완료된 항목의 백분율 같은 리스트의 유용한 속성들
+</details>
 
-- [📺 Redux vs MobX](https://www.inflearn.com/course/redux-mobx-%EC%83%81%ED%83%9C%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC)
+## More Learning 🚀
 
-  > 해당 프로젝트의 모티브를 제공한 강의
+> 다양한 상태관리툴 경험해보기! (2023.05.08) ![state-managements](./screenshots/state-managements.png)
 
-- [🗒 2021년 React 상태 관리 라이브러리 전쟁](https://mmsesang.tistory.com/entry/2021%EB%85%84-React-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%A0%84%EC%9F%81-Hooks-Redux-Recoil)
+- `zustand` & `xstate` 는 꼭 사용해보고 싶다.
+- `mobX`는 뭔가 잘 사용하고 싶다. class를 사용해서 기존 코드스타일과 익숙하지 않고,OOP적인 느낌이 강해서 mobX를 잘하면 시야가 넓어질것 같은 느낌이 든다.)
 
-  > `상태 관리 툴` 세계의 큰 그림을 볼 수 있는 글
+---
 
-- [🗒 Redux Toolkit 공홈](https://redux-toolkit.js.org/)
+# 참고자료
+
+- 해당 프로젝트의 `모티브`를 제공한 강의
+
+  - [📺 Redux vs MobX](https://www.inflearn.com/course/redux-mobx-%EC%83%81%ED%83%9C%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC)
+
+- `상태 관리 툴` 세계의 큰 그림을 볼 수 있는 글
+
+  - [🗒 2021년 React 상태 관리 라이브러리 전쟁](https://mmsesang.tistory.com/entry/2021%EB%85%84-React-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%A0%84%EC%9F%81-Hooks-Redux-Recoil)
+
+  - [React State Management Libraries 2023](https://fe-tool.com/awesome-react-state-management)
