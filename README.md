@@ -39,8 +39,6 @@
 
 ![middleware](./screenshots/middleware.png)
 
-리덕스에서 미들웨어가 1)무엇이고 이것이 2)왜 필요한지 알아보자. 나아가 코드적으로 3)어떻게 동작하는지에 대해서 살펴보자.
-
 ## Redux Toolkit [done]
 
 > 리덕스 툴킷을 이용한 `CRUD 앱`을 구현해보자.
