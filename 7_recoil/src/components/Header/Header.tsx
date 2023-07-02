@@ -18,6 +18,6 @@ export const Container = styled.div`
   color: white;
   background-color: #0984e3;
 
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
 `

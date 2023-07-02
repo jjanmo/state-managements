@@ -19,8 +19,10 @@ function App() {
 export default App
 
 const Container = styled.div`
-  height: 90vh;
-  max-width: 1000px;
-  margin: 5vh auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 900px;
+  margin: 20px auto;
   background-color: #eee;
 `

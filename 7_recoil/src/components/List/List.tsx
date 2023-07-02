@@ -22,8 +22,8 @@ function List() {
 export default List
 
 const Container = styled.div`
+  flex: 1;
   width: 100%;
-  height: 50vh;
   margin: 1rem auto 0;
   border-radius: 10px;
   overflow: hidden;
