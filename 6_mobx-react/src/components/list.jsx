@@ -7,7 +7,7 @@ const List = () => {
   const { completedTodos, totalTodos, todos } = useTodosContext();
 
   return (
-    <div>
+    <>
       <h1 className={styles.todosCount}>
         <span title="완료" className={styles.completed}>
           {completedTodos}
@@ -17,14 +17,16 @@ const List = () => {
           {totalTodos}
         </span>
       </h1>
-      <ul>
-        {todos?.length > 0 ? (
-          todos.map((todo) => <Todo key={todo.id} {...todo} />)
-        ) : (
-          <div className={styles.placeholder}>Hello MobX</div>
-        )}
-      </ul>
-    </div>
+      <section>
+        <ul>
+          {todos?.length > 0 ? (
+            todos.map((todo) => <Todo key={todo.id} {...todo} />)
+          ) : (
+            <div className={styles.placeholder}>Hello MobX</div>
+          )}
+        </ul>
+      </section>
+    </>
   );
 };
 
