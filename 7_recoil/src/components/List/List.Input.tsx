@@ -1,4 +1,4 @@
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import * as S from './List.style'
 import { todoListAtom } from '../../recoil/atom'
 import { useForm } from 'react-hook-form'
@@ -23,9 +23,18 @@ function Input() {
     },
   })
 
-  const setTodoList = useSetRecoilState(todoListAtom)
+  const [todoList, setTodoList] = useRecoilState(todoListAtom)
 
   const onSubmit = (data: FormData) => {
+    if (todoList.length === 7) {
+      alert('이미 많은 할 일이 있네요 ~ 할 일을 마무리 짓고 추가하세요 😄')
+      reset({
+        value: '',
+        priority: 'middle',
+      })
+      return
+    }
+
     setTodoList((todoList) => [
       ...todoList,
       {
