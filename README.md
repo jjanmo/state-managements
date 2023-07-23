@@ -41,7 +41,9 @@
 
 ## Redux Toolkit [done]
 
-> 리덕스 툴킷을 이용한 `CRUD 앱`을 구현해보자.
+> 리덕스 툴킷을 이용한 `CRUD Blog App` 🗒️
+
+> [Demo](https://github.com/devdemoDD/rtk-blog-app-v2)
 
 <details>
   <summary>Features</summary>
