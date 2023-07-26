@@ -13,6 +13,8 @@
 
 ## Redux [done]
 
+> `1_redux` directory
+
 > 리덕스의 전체적인 흐름을 다이어그램으로 알아보자 🚀
 
 ![redux-flow](./screenshots/redux_flow.png)
@@ -31,6 +33,8 @@
 
 ## React Redux [done]
 
+> `2_react-redux` directory
+
 리액트 리덕스가 무엇일까? 리덕스와 리액트 리덕스는 무엇이 다르길래 우리는 리덕스 뿐만 아니라 리액트 리덕스도 알아야할까?
 
 ### middleware
@@ -41,9 +45,11 @@
 
 ## Redux Toolkit [done]
 
+> `3_redux-toolkit` directory
+
 > 리덕스 툴킷을 이용한 `CRUD Blog App` 🗒️
 
-> [Demo](https://github.com/devdemoDD/rtk-blog-app-v2)
+> [Demo](https://devdemodd.github.io/rtk-blog-app-v2/)
 
 <details>
   <summary>Features</summary>
@@ -71,7 +77,9 @@
 
 ## Redux Saga [-ing]
 
-> [리덕스 사가](https://mskims.github.io/redux-saga-in-korean/)에 대해서 알아보자
+> `4_redux-saga` directory
+
+> rtk + rtk-query/redux-saga을 이용한 TodoApp + Pokemon Deck
 
 정리
 
@@ -85,15 +93,19 @@
   - https://ssangq.netlify.app/posts/redux-saga
   - https://meetup.toast.com/posts/136
 
-- [pokemon api](https://pokeapi.co/)
+- [리덕스 사가](https://mskims.github.io/redux-saga-in-korean/)에 대해서 알아보자
 
 ## MobX [-ing]
+
+> `5_mobx` directory
 
 > 간단한 카운터를 바닐라 자바스크립트와 MobX 조합으로 만들면서 MobX를 알아보자.
 
 Redux 다음으로 알려진 상태관리 라이브러리는 `MobX`이다. (두번째라고 해서 두번째로 좋다는 건 아니다. 개발환경에 따라서 맞는 기술을 사용하면 되는 것!!)
 
 ## MobX React [done]
+
+> `6_mobx-react` directory
 
 > 리액트에서 MobX를 이용한 간단한 TodoApp을 통해서 리액트에서 MobX의 사용방법에 대해서 알아보자.
 
