@@ -8,6 +8,7 @@ export default function Nav() {
       <div className="group">
         <Link to="/">
           <div className="font-serif tracking-wide">ReduxToolkit</div>
+          {/* TODO : 라우팅이 변경될때 마다 rotate 애니메이션 추가 */}
           <div
             className={`rotate-180 border-b-4 font-mono tracking-tight duration-500 ease-out group-hover:border-red-300`}
           >
