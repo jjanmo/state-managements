@@ -1,6 +1,4 @@
-import Home from '@pages/Home'
-import Pokemon from '@pages/Pokemon'
-import TodoApp from '@pages/TodoApp'
+import { Home, Pokemon, TodoApp } from '@/pages'
 import { createBrowserRouter } from 'react-router-dom'
 
 export const router = createBrowserRouter([
