@@ -12,6 +12,10 @@ export default defineConfig({
         replacement: path.resolve(__dirname, 'src/components'),
       },
       {
+        find: '@hooks',
+        replacement: path.resolve(__dirname, 'src/hooks'),
+      },
+      {
         find: '@pages',
         replacement: path.resolve(__dirname, 'src/pages'),
       },
