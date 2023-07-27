@@ -4,7 +4,7 @@ export default function Header() {
   const [date, dayOfWeek] = getToday()
 
   return (
-    <div className="border-b-[1px] border-gray-200 px-10 pb-6 pt-12">
+    <div className="border-b-[1px] border-gray-200 px-10 pb-6 pt-8">
       <div>
         <h1 className="text-4xl font-bold">{date}</h1>
         <h3 className="pt-3 text-xl  text-gray-400">{dayOfWeek}</h3>
