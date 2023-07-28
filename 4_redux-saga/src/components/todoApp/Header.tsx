@@ -5,12 +5,12 @@ export default function Header() {
 
   return (
     <div className="border-b-[1px] border-gray-200 px-10 pb-6 pt-8">
-      <div>
-        <h1 className="text-4xl font-bold">{date}</h1>
-        <h3 className="pt-3 text-xl  text-gray-400">{dayOfWeek}</h3>
-      </div>
-      <div className="mt-4 text-xl text-purple-400">
-        할 일 <span className="font-bold">{2}개</span> 남음
+      <h1 className="text-3xl font-bold">{date}</h1>
+      <div className="mt-3 flex justify-between">
+        <h3 className="text-xl text-gray-400">{dayOfWeek}</h3>
+        <h3 className="text-xl text-purple-400">
+          할 일 <span className="font-bold">{2}개</span> 남음
+        </h3>
       </div>
     </div>
   )

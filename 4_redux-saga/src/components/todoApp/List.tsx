@@ -37,7 +37,7 @@ export default function List() {
     <ul className="relative flex-1 px-6 py-2">
       {todos?.map((todo) => <Todo key={todo.id} {...todo} />)}
 
-      <Form isShowingForm={isShowingForm} />
+      {isShowingForm && <Form isShowingForm={isShowingForm} />}
       <FormButton onClick={handleClick} isShowingForm={isShowingForm} />
     </ul>
   )

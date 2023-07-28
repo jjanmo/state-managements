@@ -22,15 +22,11 @@ export default function Form({ isShowingForm }: Props) {
     }
   }, [isShowingForm])
 
-  // TODO : fix form up/down animation especially up!
+  // TODO : form animation ?? addable??
 
   return (
     <form
-      className={`absolute bottom-[-300px] left-0 flex h-[150px] w-full items-start justify-center rounded-b-2xl bg-gray-100 pt-8  ${
-        isShowingForm
-          ? 'duration-50 -translate-y-[300px] opacity-100 ease-out'
-          : 'opacity-0 duration-300 ease-out'
-      }`}
+      className="absolute bottom-0 left-0 flex h-[120px] w-full items-center justify-center rounded-b-2xl bg-gray-100 "
       onSubmit={handleSubmit}
     >
       <input
