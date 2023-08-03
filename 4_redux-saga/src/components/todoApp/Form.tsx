@@ -1,15 +1,27 @@
 import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addTodo } from '@/store/todosAction'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Props {
   isShowingForm: boolean
 }
 
 export default function Form({ isShowingForm }: Props) {
+  const dispatch = useDispatch()
+
   const [value, setValue] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const payload = {
+      id: uuidv4(),
+      content: value,
+    }
+    dispatch(addTodo(payload))
+    setValue('')
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target

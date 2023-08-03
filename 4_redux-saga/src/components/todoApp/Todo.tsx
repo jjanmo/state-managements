@@ -1,30 +1,34 @@
 import { useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import Checkbox from './Checkbox'
+import { Todo as TodoType } from '@/store/todosReducer'
+import { useDispatch } from 'react-redux'
+import { deleteTodo, updateStatus } from '@/store/todosAction'
 
-interface Props {
-  id: number
-  content: string
-  done: boolean
-}
+export default function Todo({ id, content, done }: TodoType) {
+  const dispatch = useDispatch()
 
-export default function Todo({ id, content }: Props) {
   const [checked, setChecked] = useState<boolean>(false)
+
   const handleChange = () => {
     setChecked((prev) => !prev)
+    dispatch(updateStatus({ id, done: !done }))
   }
   const handleClickEdit = () => {
     console.log('edit')
   }
   const handleClickDelete = () => {
-    console.log('delete')
+    const result = confirm('삭제하시겠어요?')
+    if (result) {
+      dispatch(deleteTodo({ id }))
+    }
   }
 
   return (
     <li className="relative my-3 flex w-full rounded-2xl px-3 font-sans text-xl text-gray-800 duration-300 ease-out hover:bg-slate-100">
       <Checkbox checked={checked} />
-      <input id={String(id)} type="checkbox" className="hidden" onChange={handleChange} />
-      <label htmlFor={String(id)} className="flex flex-1 cursor-pointer py-3 pl-8">
+      <input id={id} type="checkbox" className="hidden" onChange={handleChange} />
+      <label htmlFor={id} className="flex flex-1 cursor-pointer py-3 pl-8">
         <div className={`w-full pl-3 pr-16 ${checked && 'line-through decoration-purple-400'}`}>
           {content}
         </div>

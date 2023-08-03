@@ -1,6 +1,11 @@
 import dayjs from 'dayjs'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
+import { Todo } from '@/store/todosReducer'
 
 export default function Header() {
+  const todos = useSelector<RootState, Todo[]>((state) => state.todos)
+  const remainedTodos = todos.filter((todo) => !todo.done).length
   const [date, dayOfWeek] = getToday()
 
   return (
@@ -9,7 +14,7 @@ export default function Header() {
       <div className="mt-3 flex justify-between">
         <h3 className="text-xl text-gray-400">{dayOfWeek}</h3>
         <h3 className="text-xl text-purple-400">
-          할 일 <span className="font-bold">{2}개</span> 남음
+          할 일 <span className="font-bold text-purple-500">{remainedTodos}개</span> 남음
         </h3>
       </div>
     </div>
