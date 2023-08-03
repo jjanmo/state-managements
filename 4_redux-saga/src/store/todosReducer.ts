@@ -1,19 +1,34 @@
 // create reducer
 
 import { createReducer } from '@reduxjs/toolkit'
+import { addTodo, deleteTodo, updateStatus } from './todosAction'
 
-// CRUD
-const todosReducer = createReducer([], (builder) => {
+export interface Todo {
+  id: string
+  content: string
+  done: boolean
+}
+
+const initialState: Todo[] = []
+
+const todosReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase('ADD_TODO', (state, action) => {
-      state.push(action.payload)
+    .addCase(addTodo, (state, action) => {
+      const { payload } = action
+      state.push({
+        id: payload.id,
+        content: payload.content || '',
+        done: false,
+      })
     })
-    .addCase('UPDATE_STATUS', (state, action) => {
-      const todo = state[action.payload.index]
+    .addCase(updateStatus, (state, action) => {
+      const { payload } = action
+      const todo = state.find((state) => state.id === payload.id)!
       todo.done = !todo.done
     })
-    .addCase('DELETE_TODO', (state, action) => {
-      state.splice(action.payload.index, 1)
+    .addCase(deleteTodo, (state, action) => {
+      const findedIdx = state.findIndex((state) => state.id === action.payload.id)!
+      state.splice(findedIdx, 1)
     })
 })
 
