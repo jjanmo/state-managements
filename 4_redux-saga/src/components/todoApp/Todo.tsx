@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import Checkbox from './Checkbox'
 import { Todo as TodoType } from '@/store/todosReducer'
 import { useDispatch } from 'react-redux'
 import { deleteTodo, updateStatus } from '@/store/todosAction'
 import { createPortal } from 'react-dom'
-import Modal from '../common/Modal'
+import EditModal from './EditModal'
 
 export default function Todo({ id, content, done }: TodoType) {
   const dispatch = useDispatch()
@@ -31,10 +31,6 @@ export default function Todo({ id, content, done }: TodoType) {
     setShowEditModal((prev) => !prev)
   }
 
-  useEffect(() => {
-    console.log(showEditModal)
-  }, [showEditModal])
-
   return (
     <>
       <li className="relative my-3 flex w-full rounded-2xl px-3 font-sans text-xl text-gray-800 duration-300 ease-out hover:bg-slate-100">
@@ -54,7 +50,9 @@ export default function Todo({ id, content, done }: TodoType) {
           </button>
         </div>
       </li>
-      {showEditModal && createPortal(<Modal id={id} onClose={handleClickModal} />, document.body)}
+
+      {showEditModal &&
+        createPortal(<EditModal id={id} onClose={handleClickModal} />, document.body)}
     </>
   )
 }
