@@ -48,6 +48,7 @@ export default function Form({ isShowingForm }: Props) {
         onChange={handleChange}
         value={value}
         className="w-10/12 rounded-lg border-[1px] border-gray-200 px-3 py-3 text-lg text-gray-800 outline-none"
+        maxLength={20}
       />
     </form>
   )
