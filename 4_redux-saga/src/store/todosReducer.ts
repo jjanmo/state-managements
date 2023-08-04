@@ -1,7 +1,7 @@
 // create reducer
 
 import { createReducer } from '@reduxjs/toolkit'
-import { addTodo, deleteTodo, updateStatus } from './todosAction'
+import { addTodo, deleteTodo, editTodo, updateStatus } from './todosAction'
 
 export interface Todo {
   id: string
@@ -9,7 +9,13 @@ export interface Todo {
   done: boolean
 }
 
-const initialState: Todo[] = []
+const initialState: Todo[] = [
+  {
+    id: 'sadfasdfasdf',
+    content: 'hello world',
+    done: false,
+  },
+]
 
 const todosReducer = createReducer(initialState, (builder) => {
   builder
@@ -23,12 +29,25 @@ const todosReducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateStatus, (state, action) => {
       const { payload } = action
-      const todo = state.find((state) => state.id === payload.id)!
+      const todo = state.find((todo) => todo.id === payload.id)!
       todo.done = !todo.done
     })
     .addCase(deleteTodo, (state, action) => {
-      const findedIdx = state.findIndex((state) => state.id === action.payload.id)!
+      const findedIdx = state.findIndex((todo) => todo.id === action.payload.id)!
       state.splice(findedIdx, 1)
+    })
+    .addCase(editTodo, (state, action) => {
+      const { payload } = action
+
+      return state.map((todo) =>
+        todo.id === payload.id
+          ? {
+              ...todo,
+              content: payload.content!,
+              done: payload.done!,
+            }
+          : todo
+      )
     })
 })
 
