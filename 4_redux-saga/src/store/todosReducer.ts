@@ -9,13 +9,7 @@ export interface Todo {
   done: boolean
 }
 
-const initialState: Todo[] = [
-  {
-    id: 'sadfasdfasdf',
-    content: 'hello world',
-    done: false,
-  },
-]
+const initialState: Todo[] = []
 
 const todosReducer = createReducer(initialState, (builder) => {
   builder
