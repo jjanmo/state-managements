@@ -25,13 +25,13 @@ function getToday() {
   const now = dayjs()
 
   const dayOfWeekMap: { [key: number]: string } = {
-    0: '월',
-    1: '화',
-    2: '수',
-    3: '목',
-    4: '금',
-    5: '토',
-    6: '일',
+    0: '일',
+    1: '월',
+    2: '화',
+    3: '수',
+    4: '목',
+    5: '금',
+    6: '토',
   }
 
   return [`${now.year()}년 ${now.month() + 1}월 ${now.date()}일`, `${dayOfWeekMap[now.day()]}요일`]
