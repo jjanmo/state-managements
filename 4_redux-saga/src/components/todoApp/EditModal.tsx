@@ -1,7 +1,8 @@
 import { RootState } from '@/store'
+import { editTodo } from '@/store/todosAction'
 import { Todo } from '@/store/todosReducer'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface Props {
   id: string
@@ -22,13 +23,29 @@ export default function EditModal({ id, onClose }: Props) {
     setValue(value)
   }
 
+  const dispatch = useDispatch()
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const payload = {
+      id,
+      content: value,
+      done: todo?.done,
+    }
+    dispatch(editTodo(payload))
+    onClose()
+  }
+
   return (
     <div className="absolute left-0 top-0 flex h-screen w-full items-center justify-center">
       <div
         className="absolute left-0 top-0 h-screen w-full bg-black opacity-70"
         onClick={onClose}
       ></div>
-      <form className="relative z-10 flex h-72 w-[410px] flex-col items-start rounded-lg bg-purple-200 px-10 pt-8">
+      <form
+        className="relative z-10 flex h-72 w-[410px] flex-col items-start rounded-lg bg-purple-200 px-10 pt-8"
+        onSubmit={handleSubmit}
+      >
         <div className="w-full">
           <label className="font-mono text-xl font-semibold">Before</label>
           <div className="mt-1 w-full rounded-md bg-white px-2 py-1 text-lg">{todo?.content}</div>
