@@ -15,6 +15,7 @@ export default function Form({ isShowingForm }: Props) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!value) return
 
     const payload = {
       id: uuidv4(),
