@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { RiTodoLine } from 'react-icons/ri'
 import { MdOutlineCatchingPokemon } from 'react-icons/md'
+import { PiClockCounterClockwiseBold } from 'react-icons/pi'
 
 export default function Nav() {
   return (
@@ -17,17 +18,37 @@ export default function Nav() {
         </Link>
       </div>
       <div className="flex">
-        <div className="mx-6 opacity-80 duration-200 ease-out hover:opacity-100">
-          <Link to="/todos">
-            <RiTodoLine size="40" />
-          </Link>
-        </div>
-        <div className="mx-6 opacity-80 duration-200 ease-out hover:opacity-100">
-          <Link to="/pokemon">
-            <MdOutlineCatchingPokemon size="40" />
-          </Link>
-        </div>
+        {navItems.map((item) => (
+          <LinkItem key={item.path} {...item} />
+        ))}
       </div>
     </header>
   )
 }
+
+interface Item {
+  path: string
+  icon: React.ReactNode
+}
+function LinkItem({ path, icon }: Item) {
+  return (
+    <div className="mx-6 opacity-80 duration-200 ease-out hover:opacity-100">
+      <Link to={path}>{icon}</Link>
+    </div>
+  )
+}
+
+const navItems: Item[] = [
+  {
+    path: '/todos',
+    icon: <RiTodoLine size="40" />,
+  },
+  {
+    path: '/counter',
+    icon: <PiClockCounterClockwiseBold size="40" />,
+  },
+  {
+    path: '/pokemon',
+    icon: <MdOutlineCatchingPokemon size="40" />,
+  },
+]

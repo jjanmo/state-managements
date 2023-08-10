@@ -1,5 +1,6 @@
 import { Home, Pokemon, TodoApp } from '@/pages'
 import { createBrowserRouter } from 'react-router-dom'
+import Counter from './pages/Counter'
 
 export const router = createBrowserRouter([
   {
@@ -9,6 +10,10 @@ export const router = createBrowserRouter([
   {
     path: '/todos',
     element: <TodoApp />,
+  },
+  {
+    path: '/counter',
+    element: <Counter />,
   },
   {
     path: '/pokemon',
