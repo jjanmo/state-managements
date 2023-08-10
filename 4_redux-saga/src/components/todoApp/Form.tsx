@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addTodo } from '@/store/todosAction'
+import { actions } from '@/store/todoSlice'
 import { v4 as uuidv4 } from 'uuid'
 
 interface Props {
@@ -20,7 +20,7 @@ export default function Form({ isShowingForm }: Props) {
       id: uuidv4(),
       content: value,
     }
-    dispatch(addTodo(payload))
+    dispatch(actions.addTodo(payload))
     setValue('')
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

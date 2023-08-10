@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import todosReducer from './todosReducer'
+import todosSlice from './todoSlice'
 import { useDispatch } from 'react-redux'
 import logger from 'redux-logger'
 
@@ -8,7 +8,7 @@ export type AppDispatch = typeof store.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch
 
 const rootReducer = combineReducers({
-  todos: todosReducer,
+  todos: todosSlice,
 })
 
 export const store = configureStore({

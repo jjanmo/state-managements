@@ -1,6 +1,5 @@
 import { RootState } from '@/store'
-import { editTodo } from '@/store/todosAction'
-import { Todo } from '@/store/todosReducer'
+import { Todo, actions } from '@/store/todoSlice'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -24,7 +23,6 @@ export default function EditModal({ id, onClose }: Props) {
   }
 
   const dispatch = useDispatch()
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const payload = {
@@ -32,7 +30,7 @@ export default function EditModal({ id, onClose }: Props) {
       content: value,
       done: todo?.done,
     }
-    dispatch(editTodo(payload))
+    dispatch(actions.editTodo(payload))
     onClose()
   }
 

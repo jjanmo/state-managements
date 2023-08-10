@@ -4,7 +4,7 @@ import Form from './Form'
 import FormButton from './FormButton'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import { Todo as TodoType } from '@/store/todosReducer'
+import { Todo as TodoType } from '@/store/todoSlice'
 
 export default function List() {
   const todos = useSelector<RootState, TodoType[]>((state) => state.todos)

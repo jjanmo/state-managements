@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import { Todo } from '@/store/todosReducer'
+import { Todo } from '@/store/todoSlice'
 
 export default function Header() {
   const todos = useSelector<RootState, Todo[]>((state) => state.todos)

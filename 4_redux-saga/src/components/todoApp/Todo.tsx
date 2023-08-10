@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import Checkbox from './Checkbox'
-import { Todo as TodoType } from '@/store/todosReducer'
+import { Todo as TodoType, actions } from '@/store/todoSlice'
 import { useDispatch } from 'react-redux'
-import { deleteTodo, updateStatus } from '@/store/todosAction'
 import { createPortal } from 'react-dom'
 import EditModal from './EditModal'
 
-export default function Todo({ id, content, done }: TodoType) {
+export default function Todo({ id, content }: TodoType) {
   const dispatch = useDispatch()
 
   const [checked, setChecked] = useState<boolean>(false)
@@ -15,7 +14,7 @@ export default function Todo({ id, content, done }: TodoType) {
 
   const handleChange = () => {
     setChecked((prev) => !prev)
-    dispatch(updateStatus({ id, done: !done }))
+    dispatch(actions.updateStatus({ id }))
   }
   const handleClickEdit = () => {
     setShowEditModal((prev) => !prev)
@@ -23,7 +22,7 @@ export default function Todo({ id, content, done }: TodoType) {
   const handleClickDelete = () => {
     const result = confirm('삭제하시겠어요?')
     if (result) {
-      dispatch(deleteTodo({ id }))
+      dispatch(actions.deleteTodo({ id }))
     }
   }
 
